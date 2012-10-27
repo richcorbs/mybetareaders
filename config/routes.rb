@@ -17,6 +17,7 @@ Mybetareaders::Application.routes.draw do
   get 'whats_hot' => 'documents#whats_hot', :as => :user_home
   get 'documents/:id/feedback' => 'documents#feedback', :as => :feedback
   get 'documents/:id/readers' => 'documents#readers', :as => :document_readers
+  get 'documents/:id/volunteers' => 'documents#volunteers', :as => :document_volunteers
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
   get 'my_reading' => 'documents#reading', :as => :reading

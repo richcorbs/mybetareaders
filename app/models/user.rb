@@ -15,9 +15,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
 
   has_many :documents
+  has_many :feedbacks
   has_many :paragraph_comments
   has_many :paragraph_ratings
-  has_many :feedbacks
+  has_many :volunteers
 
   def full_name
     (first_name || last_name) ? "#{first_name} #{last_name}" : email

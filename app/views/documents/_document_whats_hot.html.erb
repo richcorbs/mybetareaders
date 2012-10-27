@@ -12,5 +12,5 @@
   </div>
   <h5><%= doc.title -%></h5>
   <p class="align-left"><%= doc.description -%></p>
-  <%= link_to signup_response, volunteer_path, :method => :post, :class => "btn btn-large btn-success" -%>
+  <%= link_to signup_response, volunteers_path(:id => doc.id), :method => :post, :class => "btn btn-large btn-success" -%>
 </div>

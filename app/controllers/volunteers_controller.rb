@@ -40,7 +40,7 @@ class VolunteersController < ApplicationController
   # POST /volunteers
   # POST /volunteers.json
   def create
-    @volunteer = Volunteer.new(params[:volunteer])
+    @volunteer = Volunteer.new(:document_id => params[:id], :user_id => current_user.id)
 
     respond_to do |format|
       if @volunteer.save

@@ -151,4 +151,8 @@ class DocumentsController < ApplicationController
   def writing
     @documents = current_user.documents.all(:order => :id)
   end
+  def volunteers
+    @document   = Document.find(params[:id])
+    @volunteers = @document.volunteers
+  end
 end

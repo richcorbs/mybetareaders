@@ -49,7 +49,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: booket_production
+  database: mybetareaders_production
   pool: 5
-  username: booket
-  password:
+  username: mybetareaders
+  password: myb3t@r3@d3rz
