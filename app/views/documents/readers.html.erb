@@ -1,0 +1,38 @@
+<div class="container">
+  <h3>Feedback Setup for <em><%= @document.title -%></em></h3>
+  <div class="row">
+    <div class="span6 body-block">
+      <%= form_tag('/feedbacks') do -%>
+        <%= hidden_field_tag :document_id, @document.id -%>
+        <div class="input-append">
+          <%= text_field_tag :email, nil, :class => 'input span4', :placeholder => 'Enter email address here' -%><button class="btn btn-success">Invite Reader</button>
+        </div>
+      <% end -%>
+      <% if @document.feedbacks.count == 0 -%>
+        <p>You have not yet invited anyone to provide feedback.</p>
+      <% else %>
+      <p><%= @document.feedbacks.where(:accepted_by_user => true).count -%> of <%= @document.feedbacks.count -%> reviewers have accepted.</p>
+        <% @document.feedbacks.order(:id).each do |f| -%>
+        <div>
+          <div class="pull-left"><i class="icon-user"></i> <%= f.user.full_name.blank? ? f.user.email : f.user.full_name -%></div>
+          <div class="rating pull-left">
+            &nbsp;&nbsp;
+            <% 1.upto(5) do |i| -%>
+              <span class="icon-star rating-star <%= (f.reader_rating && f.reader_rating <= i) ? 'rated' : '' -%>" id="star_<%= f.id -%>_<%= i -%>" data-stars="<%= i -%>" data-feedback-id="<%= f.id -%>"></span>
+            <% end -%>
+          </div>
+          <div class="pull-right"><%= link_to "Uninvite", "/feedbacks/#{f.id}", :method => :delete, :class => 'btn btn-mini' -%></div>
+          <div class="clear"></div>
+          <div class="pull-left">&nbsp;&nbsp;<small class="url" title="you can share this URL with the invitee"><%= "#{request.protocol}#{request.host}/documents/#{@document.id}/feedback?t=#{f.user.auth_token}" -%></small></div>
+        </div>
+        <% end -%>
+      <% end %>
+    </div>
+    <div class="span4 body-block">
+      <%= form_tag feedbacks_path, :style => "margin-bottom:0;" do -%>
+        <p>Invite <%= select_tag :qty, options_for_select(1..25), :class => "input input-mini" -%> random reader(s) that match your document's audience and genre.</p>
+        <%= submit_tag "Invite Random Readers", :class => 'btn btn-success' -%>
+      <% end %>
+    </div>
+  </div>
+</div>

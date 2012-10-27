@@ -1,0 +1,13 @@
+<div class="container" id="document">
+  <div class="row">
+    <div class="span2">
+      <% if current_user == @document.user -%>
+      <span class="badge <%= @document.overall_rating > 0 ? 'badge-success' : 'badge-warning' -%> pull-right" style="margin-right:-10px;" title="This ranges from -1.0 to +1.0.">Rating: <%= "%3.2f" % @document.overall_rating -%></span>
+      <% end %>
+    </div>
+    <div class="span10">
+      <h3><%= @document.title -%></h3>
+    </div>
+  </div>
+  <%= render :partial => "paragraph", :collection => @document.paragraphs %>
+</div>

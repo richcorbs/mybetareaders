@@ -1,0 +1,19 @@
+<% 
+  if document_group.is_a?(Document)
+    doc = document_group
+  elsif document_group.is_a?(Feedback)
+    doc = document_group.document
+  end
+-%>
+
+<div class="span3 document-div document-block">
+  <div class="pull-right" style="margin-top:-25px;margin-right:-20px;"><%= link_to (raw "<i class='icon-remove'></i>"), "/documents/#{doc.id}", :method => :delete, :confirm => "If you delete this document it will also delete all ratings and comments.  Are you sure?", :class => "delete-book-link" -%></div>
+  <div class="book_rectangle" style="background:<%= doc.book_jacket_color -%>;">
+    <div class="book-binding" style="background:<%= doc.book_binding_color -%>;"></div>
+  </div>
+  <h5><%= doc.title -%></h5>
+  <a href="<%= feedback_path(doc.id) -%>" class="btn btn-mini"><i class="icon-comments"></i> Feedback</a>
+  <% if doc.user == current_user -%>
+    <a href="<%= document_readers_path(doc.id) -%>" class="btn btn-mini"><i class="icon-group"></i> Readers</a>
+  <% end %>
+</div>

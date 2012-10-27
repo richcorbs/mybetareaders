@@ -1,0 +1,37 @@
+<%= form_for(@paragraph_rating) do |f| %>
+  <% if @paragraph_rating.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paragraph_rating.errors.count, "error") %> prohibited this paragraph_rating from being saved:</h2>
+
+      <ul>
+      <% @paragraph_rating.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :paragraph_id %><br />
+    <%= f.number_field :paragraph_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :character %><br />
+    <%= f.number_field :character %>
+  </div>
+  <div class="field">
+    <%= f.label :pace %><br />
+    <%= f.number_field :pace %>
+  </div>
+  <div class="field">
+    <%= f.label :plot %><br />
+    <%= f.number_field :plot %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

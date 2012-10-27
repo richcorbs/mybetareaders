@@ -1,0 +1,128 @@
+// Place all the styles related to the documents controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.speech_bubble {
+  position:relative;
+  padding:15px 15px 15px 15px;
+  margin:10px 0;
+  color:#333;
+  background:#f0f0f0;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:5px;
+}
+
+/* creates the triangle */
+.speech_bubble:after {
+  content:"";
+  position:absolute;
+  top:-20px;
+  left:20px;
+  border:10px solid transparent;
+  border-bottom-color:#f0f0f0;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+
+blockquote.comment {
+  margin:0 0 10px;
+}
+
+blockquote.comment.flaggable:hover {
+  cursor: pointer;
+}
+
+p.blockquote-flag {
+  margin: 3px -50px 0 0;
+}
+
+i.fail {
+  color: maroon;
+}
+
+button.comment_button {
+  margin-bottom:10px;
+}
+
+p.paragraph:hover {
+  cursor:pointer;
+}
+
+.book_rectangle {
+  width: 140px;
+  height: 180px;
+  margin: 0 auto;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.80);
+  -moz-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.80);
+  -webkit-box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.80);
+}
+
+div.document-div {
+  text-align:center;
+}
+
+.centered {
+  text-align:center;
+}
+
+label {
+  font-weight:bold;
+}
+
+.badge-paragraph {
+  opacity:0.7;margin-top:4px;
+}
+
+#document {
+  background:#ffffff; border:1px solid #d4d4d4; padding: 20px 10px 10px 10px;
+}
+
+.document-block {
+  background:white;border:1px solid #d4d4d4; padding:30px;
+}
+.book-binding {
+  height:180px; width:40px;
+}
+.rating {
+  padding-left:10px;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  color: #888;
+}
+.rating:hover {
+  cursor:pointer;
+}
+.rating-star.rated {
+  color: gold;
+}
+.rating > span:hover,
+.rating > span:hover ~ span {
+  color: transparent;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   color: gold;
+}
+span.bookmark-span {
+  margin-right: -20px;
+}
+span.bookmark-span i {
+  color:maroon;
+  font-size: 2.0em;
+  line-height: 1.25em;
+  text-shadow: 2px 2px 2px #666;
+}
+div.comments-box {
+  background-color:#fcfcfc;
+  padding:6px 6px 0 6px;
+  border:1px solid #e0e0e0;
+}
+a.delete-book-link {
+}
+a.delete-book-link:hover {
+  background:white;
+  text-decoration:none;
+  color:maroon;
+}

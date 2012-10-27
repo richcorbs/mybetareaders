@@ -1,0 +1,8 @@
+<div class="container" style="border:1px solid #f0f0f0;padding: 10px;">
+  <h3>My Reading Projects</h3>
+  <% @feedbacks.in_groups_of(3, false) do |group| -%>
+    <div class="row" style="padding-bottom:20px;">
+      <%= render :partial => "document_group", :collection => group -%>
+    </div>
+  <% end %>
+</div>

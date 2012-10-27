@@ -1,0 +1,75 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <% if current_user -%>
+        <a class="brand" href="/dashboard"><em>my</em>betareaders</a>
+      <% else %>
+        <a class="brand" href="/"><em>my</em>betareaders</a>
+      <% end %>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <% if current_user -%>
+            <li class="">
+              <%= link_to "My Reading Projects", reading_path -%>
+            </li>
+            <li class="">
+              <%= link_to "My Writing Projects", writing_path -%>
+            </li>
+            <li class="">
+              <a href="preferences">My Preferences</a>
+            </li>
+            <% if current_user.admin? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                <ul class="dropdown-menu"> 
+                  <li class="">
+                    <a href="<%= audiences_path -%>">Audiences</a>
+                  </li>
+                  <li class="">
+                    <a href="<%= criteria_path -%>">Criteria</a>
+                  </li>
+                  <li class="">
+                    <a href="<%= genres_path -%>">Genres</a>
+                  </li>
+                  <li class="">
+                    <a href="<%= users_path -%>">Users</a>
+                  </li>
+                </ul>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="">
+              <a href="/how_it_works">How it Works</a>
+            </li>
+            <li class="">
+              <a href="/features">Features</a>
+            </li>
+            <li class="">
+              <a href="/pricing">Pricing</a>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <li class="">
+              <%= link_to 'Logout', logout_path -%>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Sign Up', signup_path -%>
+            </li>
+            <li>
+              <%= link_to 'Login', login_path -%>
+            </li>
+          <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

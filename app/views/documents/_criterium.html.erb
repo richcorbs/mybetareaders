@@ -1,0 +1,11 @@
+<div class='container'>
+<div class="btn-group pull-left">
+  <button id="up_<%= criterium.criterium -%>_<%= paragraph.id -%>" class="btn btn-mini rate-criterium <%= button_class(@rating, criterium.criterium, 'up') -%>" data-direction="up" data-criterium="<%= criterium.criterium -%>" data-paragraph-id="<%= paragraph.id -%>">
+    <i class="icon-thumbs-up"></i>
+  </button>
+  <button id="down_<%= criterium.criterium -%>_<%= paragraph.id -%>" class="btn btn-mini rate-criterium <%= button_class(@rating, criterium.criterium, 'down') -%>" data-direction="down" data-criterium="<%= criterium.criterium -%>" data-paragraph-id="<%= paragraph.id -%>">
+    <i class="icon-thumbs-down"></i>
+  </button>
+</div>
+<h5 style="margin-top:3px;padding:0 0 0 60px;color:#666;" title="<%= criterium.description -%>"><%= criterium.criterium.titleize -%> <small><em><%= criterium.description -%></em></small></h5>
+</div>

@@ -1,0 +1,20 @@
+<h1>Listing Genres</h1>
+
+<div class="body-block">
+  <table class="table">
+    <tr>
+      <th>Genre</th>
+      <th></th>
+    </tr>
+
+  <% @genres.each do |genre| %>
+    <tr>
+      <td><%= genre.genre -%></td>
+      <td><div class="pull-right"><%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_genre_path(genre) %></div></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= link_to (raw "<i class='icon-plus-sign'></i> New Genre"), new_genre_path, :class => 'btn' %>
+
+</div>

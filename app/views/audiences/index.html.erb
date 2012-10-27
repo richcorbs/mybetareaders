@@ -1,0 +1,21 @@
+<h1>Listing audiences</h1>
+
+<div class="body-block">
+  <table class="table">
+    <tr>
+      <th>Audience</th>
+      <th></th>
+    </tr>
+
+  <% @audiences.each do |audience| %>
+    <tr>
+      <td><%= audience.audience -%></td>
+      <td>
+        <div class="pull-right"><%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_audience_path(audience) %></div>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= link_to (raw "<i class='icon-plus-sign'></i> New Audience"), new_audience_path, :class => 'btn' %>
+</div>

@@ -1,0 +1,46 @@
+<div class="row">
+  <div class='span12'>
+    <h3>Change Password</h3>
+    <div class="body-block">
+      <%= form_tag '/change_password' do -%>
+        <label>Password</label>
+        <%= password_field_tag :password -%>
+        <label>Password Confirm</label>
+        <%= password_field_tag :password_confirm -%>
+        <br />
+        <%= submit_tag 'Change Password', :class => 'btn btn-success' -%>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="span6">
+    <h3>Reading Preferences</h3>
+    <div class="body-block">
+      <%= form_tag("/users/#{current_user.id}/preferences_update", :method => :put) do -%>
+        <p>These are the types of books you are willing to read.</p>
+        <div class="row">
+          <div class="span3">
+            <h4>Audiences</h4>
+            <% Audience.order(:audience).each do |a| -%>
+              <p><%= check_box_tag a.audience, '1', (current_user.reading_preferences[a.audience]=='true') -%> <%= a.audience.titleize -%></p>
+            <% end -%>
+          </div>
+          <div class="span2">
+            <h4>Genres</h4>
+            <% Genre.order(:genre).each do |g| -%>
+            <p><%= check_box_tag g.genre, '1', (current_user.reading_preferences[g.genre]=='true') -%> <%= g.genre.titleize -%></p>
+            <% end -%>
+          </div>
+        </div>
+        <%= submit_tag "Update Reader Preferences", :class => 'btn btn-success' -%>
+      <% end -%>
+    </div>
+  </div>
+  <div class="span6">
+    <h3>Writing Preferences</h3>
+    <div class="body-block">
+      <h4>Stuff</h4>
+    </div>
+  </div>
+</div>

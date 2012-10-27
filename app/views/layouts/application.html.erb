@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Booket</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Kaushan+Script&text=loopt' rel='stylesheet' type='text/css'> -->
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= render :partial => "shared/navbar" -%>
+
+<div class="container" style="margin-top:55px;">
+
+  <%= yield %>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h3>
+  <%= @document.title %>
+  <small>A <%= @document.doctype.titleize -%> by <%= @document.user.full_name -%></small>
+</h3>
+
+  <%= @document.doctype.titleize %>
+
+<%= link_to 'Back', writing_path %>

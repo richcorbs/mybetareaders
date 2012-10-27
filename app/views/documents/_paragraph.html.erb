@@ -1,0 +1,59 @@
+<% @rating = paragraph.rating_by_user current_user -%>
+<div class="row">
+  <div class="span2">
+    <% if current_user == @document.user -%>
+      <span class="badge pull-right badge-paragraph" style="margin-right:-10px;" id="comments_count_<%= paragraph.id -%>"><%= paragraph.paragraph_comments.count -%></span>
+      <span class="badge pull-right badge-paragraph badge-important" style="margin-right:5px"><%= paragraph.thumbs_down_ratings -%></span>
+      <span class="badge pull-right badge-paragraph badge-success" style="margin-right:5px;"><%= paragraph.thumbs_up_ratings -%></span>
+      <span id="paragraph_comment_flag_<%= paragraph.id -%>" class="pull-right" style="margin:3px 5px;">
+        <% if paragraph.paragraph_comments.where(:writer_flagged => true).count > 0 -%>
+          <i class="icon-flag fail"></i>
+        <% end %>
+      </span>
+    <% else %>
+      <% if @feedback.bookmark == paragraph.id -%>
+        <span class="pull-right bookmark-span" id="bookmark_<%= paragraph.id -%>"><i class="icon-bookmark"></i></span>
+      <% else %>
+        <span class="pull-right bookmark-span" id="bookmark_<%= paragraph.id -%>"></span>
+      <% end %>
+    <% end -%>
+  </div>
+  <div class="span10">
+    <p class="paragraph" onclick="$('#input_box_<%= paragraph.id -%>').toggle()">
+      <%= paragraph.text -%>
+    </p>
+    <div id="input_box_<%= paragraph.id -%>" class="speech_bubble" style="display:none;">
+      <div class="row">
+        <div class="span3">
+          <% if current_user != @document.user -%>
+            <%= form_for ParagraphRating.new, :html => {:id => "rating_buttons_form_#{paragraph.id}"} do -%>
+              <%= render :partial => 'criterium', :collection => @criteria, :locals => {:paragraph => paragraph} -%>
+            <% end -%>
+            <% if current_user != @document.user -%>
+              <p style="position:absolute;bottom:5px;"><button class="btn btn-mini bookmark-button" data-paragraph-id="<%= paragraph.id -%>"><i class="icon-bookmark"></i> Set bookmark here</button></p>
+            <% end %>
+          <% else %>
+            <div>
+              <p><strong>Rating by all readers</strong></p>
+              <% @criteria.each do |criterium| %>
+                <span class="badge pull-left badge-paragraph badge-success"><%= paragraph.thumbs_up_ratings criterium.criterium -%></span>
+                <span class="badge pull-left badge-paragraph badge-important"><%= paragraph.thumbs_down_ratings criterium.criterium -%></span>
+                <h4 style="margin-top:10px;padding:0 0 0 60px;color:#666;"><%= criterium.criterium.titleize -%></h4>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="span6 pull-right comments-box">
+          <%= form_for ParagraphComment.new, :html => {:id => "comment_form_#{paragraph.id}", :style => "margin-bottom:0;"} do |f| -%>
+            <%= hidden_field_tag "paragraph_comment[paragraph_id]", paragraph.id -%>
+            <%= f.text_area :comment, :rows => 4, :class => "span6", :id => "comments_text_area_#{paragraph.id}" -%>
+            <button class="btn btn-mini btn-success comment_button" data-paragraph-id="<%= paragraph.id -%>" data-form-id="comment_form_<%= paragraph.id -%>">Add comment</button>
+          <% end %>
+          <div id="comments_<%= paragraph.id -%>">
+            <%= render :partial => 'documents/paragraph_comment', :collection => paragraph.paragraph_comments -%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

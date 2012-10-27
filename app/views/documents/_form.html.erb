@@ -1,0 +1,74 @@
+<% 
+  rb = rand(100)
+  gb = rand(100)
+  bb = rand(100)
+  rf = rand(100)
+  gf = rand(100)
+  bf = rand(100)
+  book_jacket_color  = "##{rb.to_s(16).rjust(2,'0')}#{gb.to_s(16).rjust(2,'0')}#{bb.to_s(16).rjust(2,'0')}"
+  book_binding_color = "##{rf.to_s(16).rjust(2,'0')}#{gf.to_s(16).rjust(2,'0')}#{bf.to_s(16).rjust(2,'0')}"
+%>
+
+<div class="container">
+  <div class="span8 body-block">
+    <%= form_for(@document) do |f| %>
+      <%= f.hidden_field :book_jacket_color, :value => book_jacket_color -%>
+      <%= f.hidden_field :book_binding_color, :value => book_binding_color -%>
+      <% if @document.errors.any? %>
+        <div id="error_explanation">
+          <h3><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h3>
+
+          <ul>
+          <% @document.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="span5" style="padding-top:10px;">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+          <span class="help-block"><i>"The Next Great Novel", "A Short Story"</i></span>
+          <br />
+          <%= f.label :fiction, "Fiction or Non-Fiction" %>
+          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :fiction, true %> Fiction</div>
+          <div><%= f.radio_button :fiction, false %> Non-Fiction</div><br />
+          <br />
+          <%= f.label :audience_id, "Audience" %>
+          <%= f.select :audience_id, options_for_select(Audience.order(:audience).collect{|a| [a.audience.titleize, a.id]}) %><br />
+          <br />
+          <%= f.label :genre_id, "Genre" %>
+          <%= f.select :genre_id, options_for_select(Genre.order(:genre).collect{|g| [g.genre.titleize, g.id]}) %><br />
+          <br />
+          <%= f.label :description, "Description for Invitations" %>
+          <%= f.text_area :description, :class => 'span5', :rows => 2 %><br />
+          <span class="help-block"><i>This will be included in your invitation to readers.</i></span>
+          <br />
+          <%= f.label :deadline, "Deadline" %>
+          <%= f.text_field :deadline, :class => 'span5' %><br />
+          <span class="help-block"><i>This is the deadline for your project.</i></span>
+        </div>
+        <div class="span3 centered">
+          <h5>Book Jacket</h5>
+          <div id="book_jacket_cover" class="book_rectangle" style="background:<%= book_jacket_color -%>">
+            <div id="book_jacket_binding" style="width:40px;height:180px;background:<%= book_binding_color -%>;"></div>
+          </div>
+          <br />
+          <button class="btn btn-mini" id="change_binding_color">Binding Color</button>
+          <button class="btn btn-mini" id="change_jacket_color">Jacket Color</button>
+        </div>
+      </div>
+      <% if @document.paragraphs.count == 0 -%>
+        <div class="row">
+          <div class="span8">
+            <label>Document Text</label>
+            <%= text_area_tag :text, nil, :rows => "10", :class => 'span8' -%>
+            <%= f.submit 'Add Document', :class => 'btn btn-success btn-large' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<h1>Listing Criteria</h1>
+
+<div class="body-block">
+  <table class="table">
+    <tr>
+      <th>Criterium</th>
+      <th>Description</th>
+      <th>Fiction</th>
+      <th>Non-Fiction</th>
+      <th></th>
+    </tr>
+
+  <% @criteria.each do |criterium| %>
+    <tr>
+      <td><%= criterium.criterium.titleize %></td>
+      <td><%= criterium.description %></td>
+      <td><%= criterium.fiction? ? 'Fiction' : '' -%></td>
+      <td><%= criterium.nonfiction? ? 'Non-Fiction' : '' -%></td>
+      <td>
+        <div class="pull-right"><%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_criterium_path(criterium) %></div>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= link_to (raw "<i class='icon-plus-sign'></i> New Criterium"), new_criterium_path, :class => 'btn' %>
+</div>

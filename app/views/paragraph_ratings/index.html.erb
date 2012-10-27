@@ -1,0 +1,31 @@
+<h1>Listing paragraph_ratings</h1>
+
+<table>
+  <tr>
+    <th>Paragraph</th>
+    <th>User</th>
+    <th>Character</th>
+    <th>Pace</th>
+    <th>Plot</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paragraph_ratings.each do |paragraph_rating| %>
+  <tr>
+    <td><%= paragraph_rating.paragraph_id %></td>
+    <td><%= paragraph_rating.user_id %></td>
+    <td><%= paragraph_rating.character %></td>
+    <td><%= paragraph_rating.pace %></td>
+    <td><%= paragraph_rating.plot %></td>
+    <td><%= link_to 'Show', paragraph_rating %></td>
+    <td><%= link_to 'Edit', edit_paragraph_rating_path(paragraph_rating) %></td>
+    <td><%= link_to 'Destroy', paragraph_rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Paragraph rating', new_paragraph_rating_path %>

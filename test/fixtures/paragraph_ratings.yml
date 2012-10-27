@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  paragraph_id: 1
+  user_id: 1
+  character: 1
+  pace: 1
+  plot: 1
+
+two:
+  paragraph_id: 1
+  user_id: 1
+  character: 1
+  pace: 1
+  plot: 1

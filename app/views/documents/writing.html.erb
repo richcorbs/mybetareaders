@@ -1,0 +1,13 @@
+<div class="container">
+  <% if @documents.count > 0 -%>
+    <h3>My Writing Projects <%= link_to "Add a Project", new_document_path, :class => 'btn pull-right' -%></h3>
+  <% else %>
+    <h3>My Writing Projects</h3>
+    <%= link_to "Add a Project", new_document_path, :class => 'btn' -%>
+  <% end %>
+  <% @documents.in_groups_of(3, false) do |group| -%>
+    <div class="row" style="padding-bottom:20px;">
+      <%= render :partial => "document_group", :collection => group -%>
+    </div>
+  <% end %>
+</div>
