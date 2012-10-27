@@ -1,0 +1,8 @@
+<h3>What's Hot?</h3>
+<ul class="thumbnails">
+  <% @documents.each do |document| -%>
+    <li class="span4">
+      <%= render :partial => "document_whats_hot", :object => document -%>
+    </li>
+  <% end %>
+</ul>

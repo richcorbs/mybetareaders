@@ -34,10 +34,11 @@
           <br />
           <%= f.label :fiction, "Fiction or Non-Fiction" %>
           <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :fiction, true %> Fiction</div>
-          <div><%= f.radio_button :fiction, false %> Non-Fiction</div><br />
+          <div><%= f.radio_button :fiction, false %> Non-Fiction</div>
           <br />
-          <%= f.label :audience_id, "Audience" %>
-          <%= f.select :audience_id, options_for_select(Audience.order(:audience).collect{|a| [a.audience.titleize, a.id]}) %><br />
+          <%= f.label :comments_private, "Private Comments?" %>
+          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :comments_private, true %> Private</div>
+          <div><%= f.radio_button :comments_private, false %> Semi-private</div>
           <br />
           <%= f.label :genre_id, "Genre" %>
           <%= f.select :genre_id, options_for_select(Genre.order(:genre).collect{|g| [g.genre.titleize, g.id]}) %><br />

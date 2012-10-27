@@ -10,6 +10,13 @@ class Paragraph < ActiveRecord::Base
     ParagraphRating.find_or_create_by_paragraph_id_and_user_id(self.id, user.id)
   end
 
+  def get_paragraph_comments( user = nil )
+    if (document.comments_private? && document.user == user) || !document.comments_private?
+      paragraph_comments
+    elsif document.comments_private? && document.user != user
+      paragraph_comments.user_ids_in([user.id, document.user_id])
+    end
+  end
   def thumbs_up_ratings( which = 'all')
     count = 0
     self.paragraph_ratings.each do |rating| 

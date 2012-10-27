@@ -1,4 +1,7 @@
 class DocumentsController < ApplicationController
+
+  before_filter :require_login, :except => [:feedback]
+
   # GET /documents
   # GET /documents.json
   def index
@@ -137,7 +140,8 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
   end
 
-  def dashboard
+  def whats_hot
+    @documents = Document.order("id desc").limit(6)
   end
 
   def reading

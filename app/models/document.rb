@@ -1,6 +1,5 @@
 class Document < ActiveRecord::Base
-  attr_accessible :doctype, :title, :user_id, :book_jacket_color, :book_binding_color, :description, :deadline, :audience_id, :genre_id, :fiction
-  belongs_to :audience
+  attr_accessible :doctype, :title, :user_id, :book_jacket_color, :book_binding_color, :description, :deadline, :genre_id, :fiction, :comments_private
   belongs_to :genre
   belongs_to :user
   has_many :paragraphs, :dependent => :destroy

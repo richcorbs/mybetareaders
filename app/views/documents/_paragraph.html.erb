@@ -50,7 +50,7 @@
             <button class="btn btn-mini btn-success comment_button" data-paragraph-id="<%= paragraph.id -%>" data-form-id="comment_form_<%= paragraph.id -%>">Add comment</button>
           <% end %>
           <div id="comments_<%= paragraph.id -%>">
-            <%= render :partial => 'documents/paragraph_comment', :collection => paragraph.paragraph_comments -%>
+            <%= render :partial => 'documents/paragraph_comment', :collection => paragraph.get_paragraph_comments( current_user ) -%>
           </div>
         </div>
       </div>

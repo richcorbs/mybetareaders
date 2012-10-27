@@ -1,4 +1,6 @@
-Booket::Application.routes.draw do
+Mybetareaders::Application.routes.draw do
+  resources :volunteers
+
   resources :criteria
 
   resources :audiences
@@ -12,7 +14,7 @@ Booket::Application.routes.draw do
   get 'how_it_works' => "pages#how_it_works"
   get 'pricing' => "pages#pricing"
 
-  get 'dashboard' => 'documents#dashboard', :as => :user_home
+  get 'whats_hot' => 'documents#whats_hot', :as => :user_home
   get 'documents/:id/feedback' => 'documents#feedback', :as => :feedback
   get 'documents/:id/readers' => 'documents#readers', :as => :document_readers
   get "login" => "sessions#new"
@@ -30,6 +32,7 @@ Booket::Application.routes.draw do
 
   post 'documents/feedback_rating' => 'documents#feedback_rating'
   post 'documents/writer_flag_paragraph' => 'documents#writer_flag_paragraph'
+  post 'documents/volunteer_now' => 'documents#volunteer_now'
   post 'paragraph_ratings/create_or_update' => 'paragraph_ratings#create_or_update'
   post 'paragraph_ratings/set_bookmark' => 'paragraph_ratings#set_bookmark'
   post '/change_password' => 'users#change_password', :as => :change_password

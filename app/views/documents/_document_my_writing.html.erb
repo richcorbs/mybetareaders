@@ -1,8 +1,8 @@
 <% 
-  if document_group.is_a?(Document)
-    doc = document_group
-  elsif document_group.is_a?(Feedback)
-    doc = document_group.document
+  if document_my_writing.is_a?(Document)
+    doc = document_my_writing
+  elsif document_my_writing.is_a?(Feedback)
+    doc = document_writer.document
   end
 -%>
 

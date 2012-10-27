@@ -1,0 +1,16 @@
+<% 
+  if document_whats_hot.is_a?(Document)
+    doc = document_whats_hot
+  elsif document_whats_hot.is_a?(Feedback)
+    doc = document_whats_hot.document
+  end
+-%>
+
+<div class="span3 document-div document-block">
+  <div class="book_rectangle" style="background:<%= doc.book_jacket_color -%>;">
+    <div class="book-binding" style="background:<%= doc.book_binding_color -%>;"></div>
+  </div>
+  <h5><%= doc.title -%></h5>
+  <p class="align-left"><%= doc.description -%></p>
+  <%= link_to signup_response, volunteer_path, :method => :post, :class => "btn btn-large btn-success" -%>
+</div>

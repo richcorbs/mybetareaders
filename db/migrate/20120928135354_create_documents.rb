@@ -7,10 +7,10 @@ class CreateDocuments < ActiveRecord::Migration
       t.string  :description
       t.string  :book_jacket_color
       t.string  :book_binding_color
-      t.integer :audience_id
       t.integer :genre_id
       t.date    :deadline
       t.boolean :fiction
+      t.boolean :comments_private, :default => true
 
       t.timestamps
     end

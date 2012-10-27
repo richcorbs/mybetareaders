@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Booket::Application.load_tasks
+Mybetareaders::Application.load_tasks

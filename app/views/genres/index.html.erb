@@ -9,7 +9,7 @@
 
   <% @genres.each do |genre| %>
     <tr>
-      <td><%= genre.genre -%></td>
+      <td><%= genre.genre.titleize -%> (<%= genre.genre -%>)</td>
       <td><div class="pull-right"><%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_genre_path(genre) %></div></td>
     </tr>
   <% end %>

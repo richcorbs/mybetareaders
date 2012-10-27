@@ -5,9 +5,11 @@
     <h3>My Writing Projects</h3>
     <%= link_to "Add a Project", new_document_path, :class => 'btn' -%>
   <% end %>
-  <% @documents.in_groups_of(3, false) do |group| -%>
-    <div class="row" style="padding-bottom:20px;">
-      <%= render :partial => "document_group", :collection => group -%>
-    </div>
-  <% end %>
+  <ul class="thumbnails">
+    <% @documents.each do |document| -%>
+      <li class="span4" style="padding-bottom:40px;">
+        <%= render :partial => "document_my_writing", :object => document -%>
+      </li>
+    <% end %>
+  </ul>
 </div>

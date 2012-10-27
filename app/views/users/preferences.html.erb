@@ -20,12 +20,6 @@
       <%= form_tag("/users/#{current_user.id}/preferences_update", :method => :put) do -%>
         <p>These are the types of books you are willing to read.</p>
         <div class="row">
-          <div class="span3">
-            <h4>Audiences</h4>
-            <% Audience.order(:audience).each do |a| -%>
-              <p><%= check_box_tag a.audience, '1', (current_user.reading_preferences[a.audience]=='true') -%> <%= a.audience.titleize -%></p>
-            <% end -%>
-          </div>
           <div class="span2">
             <h4>Genres</h4>
             <% Genre.order(:genre).each do |g| -%>

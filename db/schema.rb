@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024122550) do
+ActiveRecord::Schema.define(:version => 20121027143609) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(:version => 20121024122550) do
     t.string   "description"
     t.string   "book_jacket_color"
     t.string   "book_binding_color"
-    t.integer  "audience_id"
     t.integer  "genre_id"
     t.date     "deadline"
     t.boolean  "fiction"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.boolean  "comments_private",   :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   create_table "feedbacks", :force => true do |t|
@@ -103,5 +103,12 @@ ActiveRecord::Schema.define(:version => 20121024122550) do
   end
 
   add_index "users", ["reading_preferences"], :name => "users_gin_reading_preferences"
+
+  create_table "volunteers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "document_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end
