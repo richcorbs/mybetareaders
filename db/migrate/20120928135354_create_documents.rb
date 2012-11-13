@@ -11,6 +11,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.date    :deadline
       t.boolean :fiction
       t.boolean :comments_private, :default => true
+      t.boolean :accept_volunteers, :default => true
 
       t.timestamps
     end

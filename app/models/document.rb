@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  attr_accessible :doctype, :title, :user_id, :book_jacket_color, :book_binding_color, :description, :deadline, :genre_id, :fiction, :comments_private
+  attr_accessible :doctype, :title, :user_id, :book_jacket_color, :book_binding_color, :description, :deadline, :genre_id, :fiction, :comments_private, :accept_volunteers
   belongs_to :genre
   belongs_to :user
   has_many :volunteers, :dependent => :destroy

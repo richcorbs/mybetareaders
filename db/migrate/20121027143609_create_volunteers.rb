@@ -3,6 +3,7 @@ class CreateVolunteers < ActiveRecord::Migration
     create_table :volunteers do |t|
       t.integer  :user_id
       t.integer  :document_id
+      t.boolean  :invited
 
       t.timestamps
     end

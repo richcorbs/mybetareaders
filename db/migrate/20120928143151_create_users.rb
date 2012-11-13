@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :password_salt
       t.string  :auth_token
       t.hstore  :reading_preferences
+      t.integer :plan_id
       t.boolean :admin
 
       t.timestamps
@@ -16,7 +17,7 @@ class CreateUsers < ActiveRecord::Migration
     user = User.new({:email => 'rich.corbridge@gmail.com', :password => "richard"})
     user.admin = true
     user.save
-    user = User.new({:email => 'jaimetheler@corbridge@gmail.com', :password => "jaime"})
+    user = User.new({:email => 'jaimetheler@gmail.com', :password => "jaime"})
     user.admin = true
     user.save
 

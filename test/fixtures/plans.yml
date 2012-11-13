@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  active_docs: 1
+  readers: 1
+  monthly_cost: 1.5
+  active: false
+
+two:
+  name: MyString
+  active_docs: 1
+  readers: 1
+  monthly_cost: 1.5
+  active: false

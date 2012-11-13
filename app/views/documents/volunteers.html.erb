@@ -22,7 +22,12 @@
                   <span class="icon-star rating-star <%= (stars && i <= stars) ? 'rated' : '' -%>"></span>
                 <% end -%>
               </td>
-              <td><%= link_to "Invite this user", "#", :class => "btn btn-mini btn-success" -%></td>
+              <td>
+                <% if !volunteer.invited? -%>
+                  <%= link_to "Invite this user", document_invite_volunteer_path(volunteer.id), :method => :post, :class => "btn btn-mini btn-success" -%></td>
+                <% else -%>
+                <p><i class="icon-ok" style="color:green;"></i> Invited</p>
+                <% end -%>
             </tr>
           <% end %>
         </tbody>

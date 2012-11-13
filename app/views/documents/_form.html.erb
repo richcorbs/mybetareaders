@@ -36,6 +36,10 @@
           <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :fiction, true %> Fiction</div>
           <div><%= f.radio_button :fiction, false %> Non-Fiction</div>
           <br />
+          <%= f.label :accept_volunteers, "Accept Volunteers?" %>
+          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :accept_volunteers, true %> Accept Volunteers</div>
+          <div><%= f.radio_button :accept_volunteers, false %> NO Volunteers</div>
+          <br />
           <%= f.label :comments_private, "Private Comments?" %>
           <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :comments_private, true %> Private</div>
           <div><%= f.radio_button :comments_private, false %> Semi-private</div>
@@ -61,15 +65,15 @@
           <button class="btn btn-mini" id="change_jacket_color">Jacket Color</button>
         </div>
       </div>
-      <% if @document.paragraphs.count == 0 -%>
         <div class="row">
           <div class="span8">
-            <label>Document Text</label>
-            <%= text_area_tag :text, nil, :rows => "10", :class => 'span8' -%>
-            <%= f.submit 'Add Document', :class => 'btn btn-success btn-large' %>
-          </div>
+            <% if @document.paragraphs.count == 0 -%>
+              <label>Document Text</label>
+              <%= text_area_tag :text, nil, :rows => "10", :class => 'span8' -%>
+            <% end %>
+          <%= f.submit :class => 'btn btn-success btn-large' %>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
 </div>

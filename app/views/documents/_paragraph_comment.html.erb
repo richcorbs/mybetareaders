@@ -1,13 +1,10 @@
-<div class="container">
   <% if @document.user == current_user -%>
-    <div class="pull-left">
+    <div class="pull-left" style="margin-left:-30px;margin-top:-3px;">
       <p class="blockquote-flag" id="paragraph_comment_flag_<%= paragraph_comment.id -%>"><%= raw paragraph_comment.writer_flagged? ? "<i class=\"fail icon-flag\"></i>" : '' -%></p>
     </div>
   <% end %>
-  <div class="span5" style="margin-left:5px;">
-    <blockquote class="comment <%= 'flaggable' if @document.user == current_user -%>" id="<%= paragraph_comment.id -%>" data-paragraph-id="<%= paragraph_comment.paragraph_id -%>" data-paragraph-comment-id="<%= paragraph_comment.id -%>">
-      <p><%= paragraph_comment.comment -%></p>
+  <div class="span4" style="margin-left:-10px;">
+    <blockquote class="comment <%= 'flaggable' if @document.user == current_user -%>" id="<%= paragraph_comment.id -%>" data-paragraph-id="<%= paragraph_comment.paragraph_id -%>" data-paragraph-comment-id="<%= paragraph_comment.id -%>"><%= paragraph_comment.comment -%>
       <small><%= paragraph_comment.user.full_name -%>, <%= time_on_date(paragraph_comment.created_at) -%></small></i>
     </blockquote>
   </div>
-</div>

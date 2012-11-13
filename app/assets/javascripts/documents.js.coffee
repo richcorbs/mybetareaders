@@ -1,8 +1,31 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+getSelected = ->
+  selected = ""
+  if window.getSelection
+    selected = window.getSelection().toString()
+  else if document.getSelection
+    selected = document.getSelection()
+  else selected = document.selection.createRange().text  if document.selection
+
 $(document).ready ->
+
   $ ->
+    $(".paragraph").live "mouseup", ->
+#      paragraph_id = $(this).attr('data-paragraph-text-id')
+      selected = getSelected()
+      # SAVE HIGHLIGHT
+      if selected.length > 0
+#        $('#paragraph_text_' + paragraph_id).highlight(selected)
+        $(this).html $(this).html().replace(selected, "<span class=\"highlight\">" + selected + "</span>")
+
+    $("p > span.highlight").click (event) ->
+      alert 'howdy'
+      #$(this).unhighlight()
+
+
     $('blockquote.comment').click (event) ->
       paragraph_comment_id = $(this).attr("data-paragraph-comment-id")
       paragraph_id         = $(this).attr("data-paragraph-id")
@@ -46,12 +69,12 @@ $(document).ready ->
             $(this).html('')
           $('#bookmark_' + paragraph_id).html(response)
 
-    $(".comment_button").click (event) ->
+    $(".comment-button").click (event) ->
       event.preventDefault()
       form_id = $(this).attr("data-form-id")
       paragraph_id = $(this).attr("data-paragraph-id")
 
-      if $('#comments_text_area_' + paragraph_id).val() != ''
+      if $('#comments_text_field_' + paragraph_id).val() != ''
         $.ajax
           type: "post"
           url: $("#" + form_id).attr("action")
@@ -59,7 +82,8 @@ $(document).ready ->
           data: $("#" + form_id).serialize()
           success: (response) ->
             $('#comments_' + paragraph_id).append(response)
-            $('#comments_text_area_' + paragraph_id).val('')
+            $('#comments_' + paragraph_id).show()
+            $('#comments_text_field_' + paragraph_id).val('')
             $('#comments_count_' + paragraph_id).text($('#comments_' + paragraph_id + ' > div.container').size())
 
     $("button.rate-criterium").click (event) ->

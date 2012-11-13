@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027143609) do
+ActiveRecord::Schema.define(:version => 20121106152317) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20121027143609) do
     t.date     "deadline"
     t.boolean  "fiction"
     t.boolean  "comments_private",   :default => true
+    t.boolean  "accept_volunteers",  :default => true
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
   end
@@ -52,11 +53,12 @@ ActiveRecord::Schema.define(:version => 20121027143609) do
   create_table "feedbacks", :force => true do |t|
     t.integer  "user_id"
     t.integer  "document_id"
-    t.integer  "reader_rating",    :default => 0
+    t.integer  "reader_rating",            :default => 0
     t.boolean  "accepted_by_user"
     t.integer  "bookmark"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.boolean  "reader_feedback_complete"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
   end
 
   create_table "genres", :force => true do |t|
@@ -89,6 +91,16 @@ ActiveRecord::Schema.define(:version => 20121027143609) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "plans", :force => true do |t|
+    t.string   "name"
+    t.integer  "active_docs"
+    t.integer  "readers"
+    t.float    "monthly_cost"
+    t.boolean  "active"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -97,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20121027143609) do
     t.string   "password_salt"
     t.string   "auth_token"
     t.hstore   "reading_preferences"
+    t.integer  "plan_id"
     t.boolean  "admin"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
@@ -107,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20121027143609) do
   create_table "volunteers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "document_id"
+    t.boolean  "invited"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

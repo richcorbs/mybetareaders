@@ -37,19 +37,10 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.find(params[:id])
   end
 
-  # POST /feedbacks
-  # POST /feedbacks.json
-  def create
-    @user = User.find_or_create_by_email(params[:email])
-    @user.create_auth_token if @user.auth_token.blank?
-
-    @feedback = Feedback.create(:user_id => @user.id, :document_id => params[:document_id])
-
-    respond_to do |format|
-      if @feedback.save
-        format.html { redirect_to :back, notice: 'Feedback was successfully created.' }
-      end
-    end
+  def decline_invitation
+    @feedback = Feedback.find(params[:id])
+    @feedback.update_attributes(:accepted_by_user => false)
+    redirect_to :back
   end
 
   # PUT /feedbacks/1
@@ -72,6 +63,8 @@ class FeedbacksController < ApplicationController
   # DELETE /feedbacks/1.json
   def destroy
     @feedback = Feedback.find(params[:id])
+    @volunteer = Volunteer.find_by_user_id_and_document_id( @feedback.user_id, @feedback.document_id )
+    @volunteer.update_attributes( :invited => false ) if @volunteer
     @feedback.destroy
 
     respond_to do |format|

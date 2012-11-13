@@ -89,14 +89,29 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def create_feedback
+    @document = Document.find(params[:document_id])
+    authorize! :create_feedback, Document, :message => "You must be the document owner to invite readers."
+    @user = User.find_or_create_by_email(params[:email])
+    @user.create_auth_token if @user.auth_token.blank?
+
+    @feedback = Feedback.create(:user_id => @user.id, :document_id => params[:document_id])
+
+    respond_to do |format|
+      if @feedback.save
+        format.html { redirect_to :back, notice: 'Feedback was successfully created.' }
+      end
+    end
+  end
+
   def feedback
+    @document = Document.find(params[:id])
     if !current_user && params[:t]
       user = User.find_by_auth_token(params[:t])
       if user
         session[:user_id] = user.id
-        @feedback = Feedback.find_by_document_id_and_user_id(params[:id], user.id)
-        @feedback.accepted_by_user = true if feedback
-        @feedback.save
+        @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user.id)
+        @feedback.update_attributes(:accepted_by_user => true) if @feedback
       else
         redirect_to "/"
       end
@@ -104,9 +119,10 @@ class DocumentsController < ApplicationController
       redirect_to login_path
     end
     
+    authorize! :feedback, Document, :message => 'You do not have access to this document.'
     @feedback ||= Feedback.find_by_document_id_and_user_id(params[:id], current_user)
-    @document = Document.find(params[:id])
     @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
+    render 'feedback2'
   end
 
   def feedback_rating
@@ -141,7 +157,8 @@ class DocumentsController < ApplicationController
   end
 
   def whats_hot
-    @documents = Document.order("id desc").limit(6)
+    authorize! :whats_hot, :document, :message => 'You need to be logged in to view that page.'
+    @documents = Document.order("id desc").where(:accept_volunteers => true).limit(6)
   end
 
   def reading
@@ -151,8 +168,16 @@ class DocumentsController < ApplicationController
   def writing
     @documents = current_user.documents.all(:order => :id)
   end
+
   def volunteers
     @document   = Document.find(params[:id])
     @volunteers = @document.volunteers
+  end
+
+  def invite_volunteer
+    @volunteer = Volunteer.find(params[:id])
+    @feedback = Feedback.create( :user_id => @volunteer.user_id, :document_id => @volunteer.document_id )
+    @volunteer.update_attributes( :invited => true )
+    redirect_to :back
   end
 end

@@ -34,6 +34,9 @@
                     <a href="<%= genres_path -%>">Genres</a>
                   </li>
                   <li class="">
+                    <a href="<%= plans_path -%>">Plans</a>
+                  </li>
+                  <li class="">
                     <a href="<%= users_path -%>">Users</a>
                   </li>
                 </ul>
@@ -47,7 +50,10 @@
               <a href="/features">Features</a>
             </li>
             <li class="">
-              <a href="/pricing">Pricing</a>
+              <a href="/the_plans">Plans</a>
+            </li>
+            <li>
+              <%= link_to 'Sign Up', signup_path -%>
             </li>
           <% end %>
         </ul>
@@ -57,9 +63,6 @@
               <%= link_to 'Logout', logout_path -%>
             </li>
           <% else %>
-            <li>
-              <%= link_to 'Sign Up', signup_path -%>
-            </li>
             <li>
               <%= link_to 'Login', login_path -%>
             </li>

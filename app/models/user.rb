@@ -45,6 +45,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def document_ids
+    documents.collect(&:id)
+  end
   def method_missing(id, *args, &block)
     if reading_preferences.has_key?(id.to_s)
       reading_preferences.fetch(id.to_s)
@@ -54,4 +57,5 @@ class User < ActiveRecord::Base
       super
     end
   end
+
 end

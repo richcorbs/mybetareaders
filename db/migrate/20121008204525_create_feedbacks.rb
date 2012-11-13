@@ -6,6 +6,7 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.integer  :reader_rating, :default => 0
       t.boolean  :accepted_by_user
       t.integer  :bookmark
+      t.boolean  :reader_feedback_complete
 
       t.timestamps
     end

@@ -8,7 +8,7 @@
   <ul class="thumbnails">
     <% @documents.each do |document| -%>
       <li class="span4" style="padding-bottom:40px;">
-        <%= render :partial => "document_my_writing", :object => document -%>
+        <%= render :partial => "document", :object => document -%>
       </li>
     <% end %>
   </ul>

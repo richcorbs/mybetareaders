@@ -69,7 +69,12 @@ div {
 }
 
 .body-block {
-  background:#ffffff;border:1px solid #d4d4d4; padding:20px;
+  background:#ffffff;
+  border:1px solid #d4d4d4;
+  padding:20px;
+}
+.body-block .plans {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.67);
 }
 .body-subdued-block {
   background:#e5e5e5;border:1px solid #cbcbcb; padding:20px;
@@ -91,4 +96,37 @@ p.sub-title {
   -o-transform: rotate(-45deg);
   /* Internet Explorer */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+span.highlight {
+  background-color: #FFFF88;
+}
+.body-box {
+  height: 150px;
+  margin: 0 auto;
+  width: 200px;
+}
+.body-box-big {
+  height: 200px;
+  margin: 0 auto;
+  width: 300px;
+}
+.body-box.blue {
+  background-color: #111575;
+}
+.body-box-big.yellow {
+  background-color: #CCAB00;
+}
+.body-box p, .body-box-big p {
+  color: white;
+  text-align: center;
+}
+.body-box p {
+  font-size: 40px;
+  font-weight: bold;
+  padding-top:60px;
+}
+.body-box-big p {
+  font-size: 60px;
+  font-weight: bold;
+  padding-top:80px;
 }

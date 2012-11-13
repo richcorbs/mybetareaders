@@ -1,13 +1,11 @@
 Mybetareaders::Application.routes.draw do
-  resources :volunteers
-
-  resources :criteria
 
   resources :audiences
-
+  resources :criteria
   resources :genres
-
   resources :markets
+  resources :plans
+  resources :volunteers
 
   get '/' => "pages#home"
   get "pages/home"
@@ -27,13 +25,16 @@ Mybetareaders::Application.routes.draw do
 
   get '/' => 'pages#home'
   get 'features' => 'pages#features'
-  get 'pricing' => 'pages#pricing'
+  get 'the_plans' => 'pages#plans'
 
   delete 'documents/:id/feedback' => 'documents#feedback'
 
   post 'documents/feedback_rating' => 'documents#feedback_rating'
+  post 'feedbacks/:id/decline_invitation' => 'feedbacks#decline_invitation', :as => :decline_invitation
   post 'documents/writer_flag_paragraph' => 'documents#writer_flag_paragraph'
+  post 'documents/:id/invite_volunteer' => 'documents#invite_volunteer', :as => :document_invite_volunteer
   post 'documents/volunteer_now' => 'documents#volunteer_now'
+  post 'documents/create_feedback' => 'documents#create_feedback'
   post 'paragraph_ratings/create_or_update' => 'paragraph_ratings#create_or_update'
   post 'paragraph_ratings/set_bookmark' => 'paragraph_ratings#set_bookmark'
   post '/change_password' => 'users#change_password', :as => :change_password
