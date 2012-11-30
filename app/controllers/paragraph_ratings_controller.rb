@@ -72,9 +72,14 @@ class ParagraphRatingsController < ApplicationController
     @paragraph = Paragraph.find(params[:paragraph_id])
     @document  = @paragraph.document
     @feedback  = Feedback.find_by_user_id_and_document_id( current_user.id, @document.id )
-    @feedback.bookmark = @paragraph.id
+    if @feedback.bookmark == @paragraph.id
+      @feedback.bookmark = nil
+      render :text => ""
+    else
+      @feedback.bookmark = @paragraph.id
+      render :text => "<i class='icon-bookmark'></i>"
+    end
     @feedback.save
-    render :text => "<i class='icon-bookmark'></i>"
   end
 
   # PUT /paragraph_ratings/1

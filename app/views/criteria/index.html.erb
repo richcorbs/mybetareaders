@@ -14,8 +14,8 @@
     <tr>
       <td><%= criterium.criterium.titleize %></td>
       <td><%= criterium.description %></td>
-      <td><%= criterium.fiction? ? 'Fiction' : '' -%></td>
-      <td><%= criterium.nonfiction? ? 'Non-Fiction' : '' -%></td>
+      <td><%= criterium.fiction? ? 'Yes' : 'No' -%></td>
+      <td><%= criterium.nonfiction? ? 'Yes' : 'No' -%></td>
       <td>
         <div class="pull-right"><%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_criterium_path(criterium) %></div>
       </td>

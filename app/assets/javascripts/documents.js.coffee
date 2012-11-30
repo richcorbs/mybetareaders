@@ -14,16 +14,12 @@ $(document).ready ->
 
   $ ->
     $(".paragraph").live "mouseup", ->
-#      paragraph_id = $(this).attr('data-paragraph-text-id')
+      paragraph_id = $(this).attr('data-paragraph-text-id')
       selected = getSelected()
       # SAVE HIGHLIGHT
       if selected.length > 0
-#        $('#paragraph_text_' + paragraph_id).highlight(selected)
-        $(this).html $(this).html().replace(selected, "<span class=\"highlight\">" + selected + "</span>")
-
-    $("p > span.highlight").click (event) ->
-      alert 'howdy'
-      #$(this).unhighlight()
+        $('#comments_text_field_' + paragraph_id).val('\"' + selected + '\" ')
+        $('#comments_text_field_' + paragraph_id).focus()
 
 
     $('blockquote.comment').click (event) ->

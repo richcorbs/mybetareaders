@@ -158,7 +158,7 @@ class DocumentsController < ApplicationController
 
   def whats_hot
     authorize! :whats_hot, :document, :message => 'You need to be logged in to view that page.'
-    @documents = Document.order("id desc").where(:accept_volunteers => true).limit(6)
+    @documents = Document.order("id desc").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
   end
 
   def reading

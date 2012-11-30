@@ -12,9 +12,9 @@ class Paragraph < ActiveRecord::Base
 
   def get_paragraph_comments( user = nil )
     if (document.comments_private? && document.user == user) || !document.comments_private?
-      paragraph_comments
+      paragraph_comments.order(:id)
     elsif document.comments_private? && document.user != user
-      paragraph_comments.user_ids_in([user.id, document.user_id])
+      paragraph_comments.user_ids_in([user.id, document.user_id]).order(:id)
     end
   end
   def thumbs_up_ratings( which = 'all')

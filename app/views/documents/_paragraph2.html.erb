@@ -21,24 +21,30 @@
       <% end %>
     <% end -%>
     <div>
-      <% if current_user != @document.user -%>
-        <%= form_for ParagraphRating.new, :html => {:id => "rating_buttons_form_#{paragraph.id}"} do -%>
-          <%= render :partial => 'criterium', :collection => @criteria, :locals => {:paragraph => paragraph} -%>
-        <% end -%>
+      <p class="pull-left btn-group">
+        <%= link_to_function (raw "<i class='icon-thumbs-up'></i> Criteria"), "$('#criteria_#{paragraph.id}').toggle()", :class => 'btn btn-mini' -%>
         <% if current_user != @document.user -%>
-          <p style="position:absolute;bottom:5px;"><button class="btn btn-mini bookmark-button" data-paragraph-id="<%= paragraph.id -%>"><i class="icon-bookmark"></i> Set bookmark here</button></p>
+          <button class="btn btn-mini bookmark-button" data-paragraph-id="<%= paragraph.id -%>"><i class="icon-bookmark"></i> Bookmark</button>
         <% end %>
-      <% else %>
-        <div id="paragraph_rating_details_<%= paragraph.id -%>" class="span2" style="display:none;margin-top:0px;padding:0 0 15px 0;">
-          <% @criteria.each do |criterium| %>
-            <div class="pull-right">
-              <span class="badge pull-right badge-paragraph badge-important" style="margin-right:20px;"><%= paragraph.thumbs_down_ratings criterium.criterium -%></span>
-              <span class="badge pull-right badge-paragraph badge-success" style="margin-right:5px;"><%= paragraph.thumbs_up_ratings criterium.criterium -%></span>
-              <span class="pull-right" style="color:#888;margin-top:3px;margin-right:5px;"><%= criterium.criterium.titleize -%></span>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      </p>
+      <div class="clearfix"></div>
+      <div style="display:none;" id="criteria_<%= paragraph.id -%>">
+        <% if current_user != @document.user -%>
+          <%= form_for ParagraphRating.new, :html => {:id => "rating_buttons_form_#{paragraph.id}"} do -%>
+            <%= render :partial => 'criterium', :collection => @criteria, :locals => {:paragraph => paragraph} -%>
+          <% end -%>
+        <% else %>
+          <div id="paragraph_rating_details_<%= paragraph.id -%>" class="span2" style="display:none;margin-top:0px;padding:0 0 15px 0;">
+            <% @criteria.each do |criterium| %>
+              <div class="pull-right">
+                <span class="badge pull-right badge-paragraph badge-important" style="margin-right:20px;"><%= paragraph.thumbs_down_ratings criterium.criterium -%></span>
+                <span class="badge pull-right badge-paragraph badge-success" style="margin-right:5px;"><%= paragraph.thumbs_up_ratings criterium.criterium -%></span>
+                <span class="pull-right" style="color:#888;margin-top:3px;margin-right:5px;"><%= criterium.criterium.titleize -%></span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="span5">
