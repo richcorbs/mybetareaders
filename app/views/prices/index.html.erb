@@ -1,0 +1,33 @@
+<h1>Prices</h1>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th><p class="centered">Min Words</p></th>
+    <th><p class="centered">Max Words</p></th>
+    <th><p class="centered">Cost</p></th>
+    <th><p class="centered">Active</p></th>
+    <th></th>
+  </tr>
+
+<% @prices.each do |price| %>
+  <tr>
+    <td><p><%= price.name %></p></td>
+    <td><p class="centered"><%= price.words_min %></p></td>
+    <td><p class="centered"><%= price.words_max %></p></td>
+    <td><p class="centered"><%= number_to_currency( price.cost ) %></p></td>
+    <td><p class="centered"><%= price.active %></p></td>
+    <td>
+      <div class="btn-group">
+        <%= link_to 'Show', price, :class => 'btn btn-mini' %>
+        <%= link_to 'Edit', edit_price_path(price), :class => 'btn btn-mini' %>
+        <%= link_to 'Destroy', price, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini' %>
+      </div>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New price', new_price_path %>
