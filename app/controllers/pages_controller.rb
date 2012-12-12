@@ -9,6 +9,6 @@ class PagesController < ApplicationController
   def how_it_works
   end
 
-  def plans
+  def pricing
   end
 end

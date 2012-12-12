@@ -105,9 +105,6 @@ class UsersController < ApplicationController
   def preferences_update
     @user = current_user
     #@user.reading_preferences = {} if @user.reading_preferences.nil?
-    Audience.all.each do |a|
-      @user.reading_preferences[a.audience] = (params[a.audience] && params[a.audience] == '1') ? true : false
-    end
     Genre.all.each do |g|
       @user.reading_preferences[g.genre] = (params[g.genre] && params[g.genre] == '1') ? true : false
     end

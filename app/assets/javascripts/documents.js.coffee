@@ -61,9 +61,13 @@ $(document).ready ->
         dataType: 'html'
         data: '&paragraph_id=' + paragraph_id
         success: (response) ->
-          $('span.bookmark-span').each ->
-            $(this).html('')
-          $('#bookmark_' + paragraph_id).html(response)
+          if response == 'add'
+            $('button.bookmark-button').each ->
+              if $(this).hasClass('btn-success')
+                $(this).removeClass('btn-success')
+            $('#bookmark_button_' + paragraph_id).addClass('btn-success')
+          else if response == 'remove'
+            $('#bookmark_button_' + paragraph_id).removeClass('btn-success')
 
     $(".comment-button").click (event) ->
       event.preventDefault()
@@ -112,21 +116,31 @@ $(document).ready ->
       #    $('#comments_text_area_' + paragraph_id).val('')
       #    $('#comments_count_' + paragraph_id).text($('#comments_' + paragraph_id + ' > blockquote').size())
 
-    $("#change_binding_color").click (event) ->
+    $("#book_icon_color").click (event) ->
       event.preventDefault()
-      new_color = get_new_color()
-      $('#book_jacket_binding').css('background', new_color)
-      $('#document_book_binding_color').val(new_color)
-      
-    $("#change_jacket_color").click (event) ->
-      event.preventDefault()
-      new_color = get_new_color()
-      $('#book_jacket_cover').css('background', new_color);
-      $('#document_book_jacket_color').val(new_color)
-      
-  get_new_color = () ->
-    r = ('00' + parseInt((Math.random() * 100)).toString(16)).slice(-2)
-    g = ('00' + parseInt((Math.random() * 100)).toString(16)).slice(-2)
-    b = ('00' + parseInt((Math.random() * 100)).toString(16)).slice(-2)
-    new_color = '#' + r + g + b
-    new_color
+      color     = $('#document_book_icon_color').val()
+      new_color = ''
+      switch color
+        when 'green'
+          new_color = 'blue'
+        when 'blue'
+          new_color = 'yellow'
+        when 'yellow'
+          new_color = 'orange'
+        when 'orange'
+          new_color = 'green'
+
+      $('#document_book_icon_color').val(new_color)
+      $('#book_icon').attr("src", '/assets/book-' + new_color + '.png');
+
+    $('#document_book_icon_color').change (event) ->
+      color = $('#document_book_icon_color').val()
+      $('#book_icon').css('background-color', color)
+
+    $('#text').keyup (event) ->
+      text = $('#text').val()
+      if text.length == 0
+        word_count = 0
+      else
+        word_count = text.split(' ').length
+      $('#word_count').text(word_count)

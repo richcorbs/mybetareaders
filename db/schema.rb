@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106152317) do
+ActiveRecord::Schema.define(:version => 20121206122522) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
@@ -39,15 +39,17 @@ ActiveRecord::Schema.define(:version => 20121106152317) do
     t.integer  "user_id"
     t.string   "doctype"
     t.string   "description"
-    t.string   "book_jacket_color"
-    t.string   "book_binding_color"
     t.integer  "genre_id"
     t.date     "deadline"
     t.boolean  "fiction"
-    t.boolean  "comments_private",   :default => true
-    t.boolean  "accept_volunteers",  :default => true
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.boolean  "comments_private",  :default => true
+    t.boolean  "accept_volunteers", :default => true
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "sentence_count"
+    t.integer  "syllable_count"
+    t.integer  "word_count"
+    t.string   "book_icon_color"
   end
 
   create_table "feedbacks", :force => true do |t|
@@ -91,14 +93,14 @@ ActiveRecord::Schema.define(:version => 20121106152317) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "plans", :force => true do |t|
+  create_table "prices", :force => true do |t|
     t.string   "name"
-    t.integer  "active_docs"
-    t.integer  "readers"
-    t.float    "monthly_cost"
+    t.integer  "words_min"
+    t.integer  "words_max"
+    t.float    "cost"
     t.boolean  "active"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -111,8 +113,9 @@ ActiveRecord::Schema.define(:version => 20121106152317) do
     t.hstore   "reading_preferences"
     t.integer  "plan_id"
     t.boolean  "admin"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "credit",              :default => 0
   end
 
   add_index "users", ["reading_preferences"], :name => "users_gin_reading_preferences"

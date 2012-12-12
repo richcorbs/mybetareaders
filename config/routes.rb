@@ -4,7 +4,7 @@ Mybetareaders::Application.routes.draw do
   resources :criteria
   resources :genres
   resources :markets
-  resources :plans
+  resources :prices
   resources :volunteers
 
   get '/' => "pages#home"

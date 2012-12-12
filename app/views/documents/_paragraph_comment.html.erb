@@ -1,3 +1,4 @@
+<div class="container">
   <% if @document.user == current_user -%>
     <div class="pull-left" style="margin-left:-30px;margin-top:-3px;">
       <p class="blockquote-flag" id="paragraph_comment_flag_<%= paragraph_comment.id -%>"><%= raw paragraph_comment.writer_flagged? ? "<i class=\"fail icon-flag\"></i>" : '' -%></p>
@@ -8,3 +9,5 @@
       <small><%= paragraph_comment.user.full_name -%>, <%= time_on_date(paragraph_comment.created_at) -%></small></i>
     </blockquote>
   </div>
+  <div class="clearfix"></div>
+</div>

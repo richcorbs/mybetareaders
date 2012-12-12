@@ -12,8 +12,6 @@
 <div class="container">
   <div class="span8 body-block">
     <%= form_for(@document) do |f| %>
-      <%= f.hidden_field :book_jacket_color, :value => book_jacket_color -%>
-      <%= f.hidden_field :book_binding_color, :value => book_binding_color -%>
       <% if @document.errors.any? %>
         <div id="error_explanation">
           <h3><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h3>
@@ -56,19 +54,19 @@
           <span class="help-block"><i>This is the deadline for your project.</i></span>
         </div>
         <div class="span3 centered">
-          <h5>Book Jacket</h5>
-          <div id="book_jacket_cover" class="book_rectangle" style="background:<%= book_jacket_color -%>">
-            <div id="book_jacket_binding" style="width:40px;height:180px;background:<%= book_binding_color -%>;"></div>
-          </div>
+          <h5>Book Icon Color</h5>
+          <% @book_icon_color = @document.book_icon_color || "#00ff00" -%>
+          <%= image_tag "book-icon.png", :id => "book_icon", :style => "background-color:#{@book_icon_color}" -%>
           <br />
-          <button class="btn btn-mini" id="change_binding_color">Binding Color</button>
-          <button class="btn btn-mini" id="change_jacket_color">Jacket Color</button>
+          <input id='document_book_icon_color' name='document[book_icon_color]' value='' style="display:inline;" />
         </div>
       </div>
         <div class="row">
           <div class="span8">
             <% if @document.paragraphs.count == 0 -%>
-              <label>Document Text</label>
+            <label>Document Text
+              (approx word count: <span id="word_count">0</span>)
+            </label>
               <%= text_area_tag :text, nil, :rows => "10", :class => 'span8' -%>
             <% end %>
           <%= f.submit :class => 'btn btn-success btn-large' %>
@@ -77,3 +75,8 @@
     <% end %>
   </div>
 </div>
+<script type='text/javascript'>
+  $(document).ready(function() {
+      $('#document_book_icon_color').simpleColor({boxWidth: 90, buttonClass: 'hidden', defaultColor: '<%= @book_icon_color -%>', insert: 'before'});
+  });
+</script>

@@ -74,10 +74,10 @@ class ParagraphRatingsController < ApplicationController
     @feedback  = Feedback.find_by_user_id_and_document_id( current_user.id, @document.id )
     if @feedback.bookmark == @paragraph.id
       @feedback.bookmark = nil
-      render :text => ""
+      render :text => "remove"
     else
       @feedback.bookmark = @paragraph.id
-      render :text => "<i class='icon-bookmark'></i>"
+      render :text => "add"
     end
     @feedback.save
   end

@@ -7,9 +7,9 @@
         <span class="icon-bar"></span>
       </button>
       <% if current_user -%>
-      <a class="brand" href="/whats_hot"><span class="rotate-45"><em>my</em></span>betareaders</a>
+      <a class="brand" href="/whats_hot"><%= image_tag "mybetareaders_logo.png", :class => "animated swing", :alt => "mybetareaders", :style => "margin-top:-5px;" -%></a>
       <% else %>
-        <a class="brand" href="/"><em>my</em>betareaders</a>
+      <a class="brand" href="/"><%= image_tag "mybetareaders_logo.png", :alt => "mybetareaders", :style => "margin-top:-5px;" -%></a>
       <% end %>
       <div class="nav-collapse collapse">
         <ul class="nav">
@@ -34,7 +34,7 @@
                     <a href="<%= genres_path -%>">Genres</a>
                   </li>
                   <li class="">
-                    <a href="<%= plans_path -%>">Plans</a>
+                    <a href="<%= prices_path -%>">Prices</a>
                   </li>
                   <li class="">
                     <a href="<%= users_path -%>">Users</a>
@@ -50,7 +50,7 @@
               <a href="/features">Features</a>
             </li>
             <li class="">
-              <a href="/the_plans">Plans</a>
+              <a href="/pricing">Pricing</a>
             </li>
             <li>
               <%= link_to 'Sign Up', signup_path -%>
