@@ -27,30 +27,32 @@
       <div class="row">
         <div class="span5" style="padding-top:10px;">
           <%= f.label :title %>
-          <%= f.text_field :title %>
-          <span class="help-block"><i>"The Next Great Novel", "A Short Story"</i></span>
+          <%= f.text_field :title, :class => 'span5' %>
+          <span class="help-block"><i>"The Next Great Novel", "A Short Story", "A Technical Paper on..."</i></span>
           <br />
           <%= f.label :fiction, "Fiction or Non-Fiction" %>
-          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :fiction, true %> Fiction</div>
-          <div><%= f.radio_button :fiction, false %> Non-Fiction</div>
-          <br />
-          <%= f.label :accept_volunteers, "Accept Volunteers?" %>
-          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :accept_volunteers, true %> Accept Volunteers</div>
-          <div><%= f.radio_button :accept_volunteers, false %> NO Volunteers</div>
-          <br />
-          <%= f.label :comments_private, "Private Comments?" %>
-          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :comments_private, true %> Private</div>
-          <div><%= f.radio_button :comments_private, false %> Semi-private</div>
+          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :fiction, true, :class => "document_radio_button" %> Fiction</div>
+          <div><%= f.radio_button :fiction, false, :class => "document_radio_button" %> Non-Fiction</div>
           <br />
           <%= f.label :genre_id, "Genre" %>
           <%= f.select :genre_id, options_for_select(Genre.order(:genre).collect{|g| [g.genre.titleize, g.id]}) %><br />
+          <br />
+          <%= f.label :accept_volunteers, "Accept Volunteers?" %>
+          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :accept_volunteers, true, :class => "document_radio_button" %> Accept Volunteers</div>
+          <div><%= f.radio_button :accept_volunteers, false, :class => "document_radio_button" %> NO Volunteers</div>
+          <span class="help-block"><i>Allow random readers to volunteer or invite specific readers. If you allow volunteers you still get to choose which ones to invite.</i></span>
+          <br />
+          <%= f.label :comments_private, "Private Comments?" %>
+          <div class="pull-left" style="padding-right: 30px;"><%= f.radio_button :comments_private, true, :class => "document_radio_button" %> Private</div>
+          <div><%= f.radio_button :comments_private, false, :class => "document_radio_button" %> Semi-private</div>
+          <span class="help-block"><i>Semi-private means all project readers can see all comments. Private means project readers can only see their own comments and the writer's comments.</i></span>
           <br />
           <%= f.label :description, "Description for Invitations" %>
           <%= f.text_area :description, :class => 'span5', :rows => 2 %><br />
           <span class="help-block"><i>This will be included in your invitation to readers.</i></span>
           <br />
           <%= f.label :deadline, "Deadline" %>
-          <%= f.text_field :deadline, :class => 'span5' %><br />
+          <%= f.text_field :deadline, :class => 'span2' %><br />
           <span class="help-block"><i>This is the deadline for your project.</i></span>
         </div>
         <div class="span3 centered">
@@ -58,7 +60,7 @@
           <% @book_icon_color = @document.book_icon_color || "#00ff00" -%>
           <%= image_tag "book-icon.png", :id => "book_icon", :style => "background-color:#{@book_icon_color}" -%>
           <br />
-          <input id='document_book_icon_color' name='document[book_icon_color]' value='' style="display:inline;" />
+          <input id='document_book_icon_color' name='document[book_icon_color]' value='' />
         </div>
       </div>
         <div class="row">
@@ -77,6 +79,6 @@
 </div>
 <script type='text/javascript'>
   $(document).ready(function() {
-      $('#document_book_icon_color').simpleColor({boxWidth: 90, buttonClass: 'hidden', defaultColor: '<%= @book_icon_color -%>', insert: 'before'});
+      $('#document_book_icon_color').simpleColor({boxWidth: 90, boxHeight:23, defaultColor: '<%= @book_icon_color -%>', insert: 'before'});
   });
 </script>

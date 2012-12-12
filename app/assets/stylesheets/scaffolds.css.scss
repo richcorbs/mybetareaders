@@ -175,7 +175,15 @@ a.book-icon-link:hover {
 }
 .simpleColorDisplay {
   margin: 0 auto;
+  display:inline-block;
 }
 .simpleColorChooser {
-  margin: -10px auto !important;
+  margin: 0 auto !important;
+}
+.simpleColorSelectButton, .simpleColorCancelButton {
+  margin-top:-17px;
+  width: 75px !important;
+}
+.document_radio_button {
+  margin-top: -3px !important;
 }
