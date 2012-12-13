@@ -155,10 +155,11 @@ ul.how-it-works {
   list-style:none;
 }
 ul.how-it-works li:before {
-  content: "\0020 \0020 \0020 \00B7 \0020";
-  margin-left: -15px;
-  margin-top: 5px;
+  content: "\0020 \0020 \0020 \00B7 \0020 \0020";
+  margin-left: -16px;
+  margin-top: 8px;
   font-weight:bold;
+  font-size: 1.3em;
 }
 ul.how-it-works.blue li:before {
   color: #0071bc;

@@ -113,10 +113,11 @@ class DocumentsController < ApplicationController
         @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user.id)
         @feedback.update_attributes(:accepted_by_user => true) if @feedback
       else
-        redirect_to "/"
+        redirect_to "/" and return
       end
     elsif !current_user
-      redirect_to login_path
+      flash[:notice] = 'You do not have access to this document.'
+      redirect_to login_path and return
     end
     
     authorize! :feedback, Document, :message => 'You do not have access to this document.'
