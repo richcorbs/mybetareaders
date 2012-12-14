@@ -78,7 +78,7 @@ GEM
       net-ssh (>= 1.99.1)
     pg (0.14.1)
     polyglot (0.3.3)
-    puma (1.6.3)
+    puma (2.0.0.b4)
       rack (~> 1.2)
     pundit (0.1.0)
       rails (~> 3.0)
@@ -137,7 +137,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   pg
-  puma
+  puma (= 2.0.0.b4)
   pundit
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
