@@ -38,7 +38,7 @@
               <div class="pull-right" style="margin-top:3px;">
                 <span class="badge pull-right badge-paragraph badge-important" style="margin-right:20px;"><%= paragraph.thumbs_down_ratings criterium.criterium -%></span>
                 <span class="badge pull-right badge-paragraph badge-success" style="margin-right:5px;"><%= paragraph.thumbs_up_ratings criterium.criterium -%></span>
-                <span class="pull-right" style="color:#888;margin-top:3px;margin-right:5px;"><%= criterium.criterium.titleize -%></span>
+                <span class="pull-right" style="color:#888;margin-top:3px;margin-right:5px;" title="<%= criterium.description -%>"><%= criterium.criterium.titleize -%></span>
               </div>
             <% end %>
           </div>

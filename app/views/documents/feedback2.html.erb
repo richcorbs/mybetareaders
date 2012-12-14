@@ -1,13 +1,27 @@
 <div class="container" id="document">
+
+  <% if current_user != @document.user -%>
+    <%= hidden_field_tag "feedback_id", @feedback.id -%>
+    <button class="btn btn-large btn-success i_am_done">Click here when you are done providing feedback.</button>
+  <% end %>
+
   <div class="row">
+
     <div class="span5">
       <h3 style="padding-left:10px;"><%= @document.title -%></h3>
     </div>
+
     <div class="span2">
       <% if current_user == @document.user -%>
-      <p class="centered badge <%= @document.overall_rating > 0 ? 'badge-success' : 'badge-warning' -%>" style="margin-top:20px;margin-right:-10px;" title="This value ranges from -1.0 to +1.0.">Overall Rating: <%= "%3.2f" % @document.overall_rating -%></p>
+        <p class="centered badge <%= @document.overall_rating > 0 ? 'badge-success' : 'badge-warning' -%>" style="margin-top:20px;margin-right:-10px;" title="This value ranges from -1.0 to +1.0.">Overall Rating: <%= "%3.2f" % @document.overall_rating -%></p>
       <% end %>
     </div>
   </div>
+
   <%= render :partial => "paragraph2", :collection => @document.paragraphs %>
+
+  <% if current_user != @document.user -%>
+    <button class="btn btn-large btn-success i_am_done">Click here when you are done providing feedback.</button>
+  <% end %>
+
 </div>

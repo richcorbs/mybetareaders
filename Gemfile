@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'capistrano'
 gem 'capistrano-ext'
-gem 'cancan'
+gem 'pundit'
 #gem 'devise'
 
 # Bundle edge Rails instead:

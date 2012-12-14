@@ -1,0 +1,16 @@
+<div class="modal" id="readability_<%= doc.id -%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+  <div class="modal-header">
+    <h3 id="myModalLabel">About <i><%= doc.title -%></i></h3>
+    <h5><i>"<%= doc.description -%>"</i></h5>
+  </div>
+  <div class="modal-body">
+    <p>There are <b><%= doc.text.word_count -%> words</b> in this document.</p>
+    <p><b>The Flesch Readability Ease is: <%= doc.text.flesch_ease_scale -%>.</b> The higher the number the easier it is to read. 0-29 is confusing (college graduate). 30-49 is difficult. 50-59 is fairly difficult. 60-69 is 'Standard' (8th and 9th grade). 70-79 is fairly easy. 80-89 is easy. 90-100 is very easy (5th grade).</p>
+    <p><b>The Flesch-Kincaid grade level is: <%= doc.text.flesch_kincaid_grade_scale -%>.</b> The is equivalent to a U.S. grade level.</p>
+    <p><b>The Fog Scale index is: <%= doc.text.fog_scale -%>.</b> The ideal score is 7 or 8. Anything above 12 is too hard for most people to read. Leading magazines average around 11.<p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+

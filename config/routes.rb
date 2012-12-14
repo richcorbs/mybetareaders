@@ -29,6 +29,7 @@ Mybetareaders::Application.routes.draw do
 
   delete 'documents/:id/feedback' => 'documents#feedback'
 
+  post 'documents/feedback_complete' => 'documents#feedback_complete'
   post 'documents/feedback_rating' => 'documents#feedback_rating'
   post 'feedbacks/:id/decline_invitation' => 'feedbacks#decline_invitation', :as => :decline_invitation
   post 'documents/writer_flag_paragraph' => 'documents#writer_flag_paragraph'

@@ -3436,7 +3436,7 @@ input[type="submit"].btn.btn-mini {
 }
 .thumbnails > li {
   float: left;
-  margin-bottom: 20px;
+  margin-bottom: 45px;
   margin-left: 20px;
 }
 .thumbnail {
@@ -5229,7 +5229,7 @@ button.close {
     margin-left: -30px;
   }
   .thumbnails > li {
-    margin-left: 30px;
+    margin-left: 10px;
   }
   .row-fluid .thumbnails {
     margin-left: 0;

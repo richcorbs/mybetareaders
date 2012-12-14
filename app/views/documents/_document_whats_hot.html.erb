@@ -6,17 +6,14 @@
   end
 -%>
 
-<div class="span4 document-div">
-  <div class="document-block" style="margin-bottom:10px;">
-    <div class="book_rectangle" style="background:<%= doc.book_jacket_color -%>;">
-      <div class="book-binding" style="background:<%= doc.book_binding_color -%>;"></div>
-    </div>
-    <h5><%= doc.title -%></h5>
-    <p class="align-left"><%= doc.description -%></p>
-    <% if Volunteer.where(:user_id => current_user.id, :document_id => doc.id).count == 0 -%>
-      <%= link_to "Volunteer to Read", volunteers_path(:id => doc.id), :method => :post, :class => "btn btn-large btn-success" -%>
-    <% else %>
-      <p class="label">You have already volunteered for this one!</p>
-    <% end %>
-  </div>
+<div class="span3 document-div document-block">
+  <%= image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color}" -%>
+  <h5><%= doc.title -%></h5>
+  <p><%= link_to "About This Document", "#readability_#{doc.id}", :class => "smaller", :style => "padding:3px;", "data-toggle" => "modal" -%></p>
+  <% if Volunteer.where(:user_id => current_user.id, :document_id => doc.id).count == 0 -%>
+    <%= link_to "Volunteer to Read", volunteers_path(:id => doc.id), :method => :post, :class => "btn btn-large btn-success" -%>
+  <% else %>
+    <p class="label">You have already volunteered for this one!</p>
+  <% end %>
 </div>
+<%= render :partial => "about_this_document", :locals => {:doc => doc} -%>

@@ -144,3 +144,14 @@ $(document).ready ->
       else
         word_count = text.split(' ').length
       $('#word_count').text(word_count)
+
+    $('.i_am_done').click (event) ->
+      feedback_id = $('#feedback_id').val()
+      if confirm 'Are you sure you are done?'
+        $.ajax
+          type: "post"
+          url: "/documents/feedback_complete/"
+          dataType: 'html'
+          data: '&feedback_id=' + feedback_id
+          success: (response) ->
+            window.location.replace '/my_reading'

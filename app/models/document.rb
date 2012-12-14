@@ -24,7 +24,7 @@ class Document < ActiveRecord::Base
   end
 
   def text
-    paragraphs.join(' ')
+    paragraphs.collect(&:text).join(' ')
   end
 
 end

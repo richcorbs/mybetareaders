@@ -1,15 +1,19 @@
 <div class="container">
-  <% if @documents.count > 0 -%>
-    <h3>My Writing Projects <%= link_to "Add a Project", new_document_path, :class => 'btn pull-right' -%></h3>
-  <% else %>
-    <h3>My Writing Projects</h3>
-    <%= link_to "Add a Project", new_document_path, :class => 'btn' -%>
-  <% end %>
-  <ul class="thumbnails">
-    <% @documents.each do |document| -%>
-      <li class="span4" style="padding-bottom:40px;">
-        <%= render :partial => "document", :object => document -%>
-      </li>
-    <% end %>
-  </ul>
+  <div class="row">
+    <div class="span12">
+      <% if @documents.count > 0 -%>
+        <h3>My Writing Projects <%= link_to "Add a Project", new_document_path, :class => 'btn pull-right' -%></h3>
+      <% else %>
+        <h3>My Writing Projects</h3>
+        <%= link_to "Add a Project", new_document_path, :class => 'btn' -%>
+      <% end %>
+      <ul class="thumbnails">
+        <% @documents.each do |document| -%>
+          <li class="span4">
+            <%= render :partial => "document", :object => document -%>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>

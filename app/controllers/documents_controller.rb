@@ -2,6 +2,8 @@ class DocumentsController < ApplicationController
 
   before_filter :require_login, :except => [:feedback]
 
+  rescue_from Pundit::NotAuthorizedError, :with => :unauthorized
+
   # GET /documents
   # GET /documents.json
   def index
@@ -110,20 +112,27 @@ class DocumentsController < ApplicationController
       user = User.find_by_auth_token(params[:t])
       if user
         session[:user_id] = user.id
-        @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user.id)
-        @feedback.update_attributes(:accepted_by_user => true) if @feedback
-      else
-        redirect_to "/" and return
       end
-    elsif !current_user
-      flash[:notice] = 'You do not have access to this document.'
-      redirect_to login_path and return
     end
-    
-    authorize! :feedback, Document, :message => 'You do not have access to this document.'
-    @feedback ||= Feedback.find_by_document_id_and_user_id(params[:id], current_user)
+
+    authorize @document
+
+    @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user)
+    @feedback.update_attributes(:accepted_by_user => true) if (@feedback.present?)
     @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
     render 'feedback2'
+  end
+
+  def feedback_complete
+    @feedback = Feedback.find(params[:feedback_id])
+    @document = @feedback.document
+    authorize @document
+    @feedback.update_attributes(:reader_feedback_complete => true)
+    if @feedback.save
+      render :text => 'OK'
+    else
+      render :text => 'FAILED'
+    end
   end
 
   def feedback_rating
@@ -155,30 +164,44 @@ class DocumentsController < ApplicationController
 
   def readers
     @document = Document.find(params[:id])
+    authorize @document
   end
 
   def whats_hot
-    authorize! :whats_hot, :document, :message => 'You need to be logged in to view that page.'
-    @documents = Document.order("id desc").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
+    authorize Document
+    @documents = Document.order("id desc").where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
   end
 
   def reading
-    @feedbacks = current_user.feedbacks.all(:include => :document, :order => :id)
+    authorize Document
+    @feedbacks = current_user.feedbacks.all(:include => :document, :order => 'id desc')
+    if @feedbacks.size > 0
+      @volunteers = current_user.volunteers.all(:conditions => "document_id not in (#{@feedbacks.collect(&:document_id).join(',')})", :include => :document, :order => 'id desc')
+    else
+      @volunteers = current_user.volunteers.all(:include => :document, :order => 'id desc')
+    end
   end
 
   def writing
-    @documents = current_user.documents.all(:order => :id)
+    authorize Document
+    @documents = current_user.documents.all(:order => 'id desc')
   end
 
   def volunteers
     @document   = Document.find(params[:id])
     @volunteers = @document.volunteers
+    authorize @document
   end
 
   def invite_volunteer
     @volunteer = Volunteer.find(params[:id])
+    @document  = @volunteer.document
+    authorize @document
     @feedback = Feedback.create( :user_id => @volunteer.user_id, :document_id => @volunteer.document_id )
     @volunteer.update_attributes( :invited => true )
     redirect_to :back
   end
+
+  private
+
 end

@@ -1,10 +1,21 @@
 <div class="container" style="border:1px solid #f0f0f0;padding: 10px;">
   <h3>My Reading Projects</h3>
-  <ul class="thumbnails">
-    <% @feedbacks.each do |feedback| -%>
-      <li class="span4" style="padding-bottom:40px;">
-        <%= render :partial => "document", :object => feedback -%>
-      </li>
-    <% end %>
-  </ul>
+  <div class="row">
+    <div class="span8">
+      <h5>You have been invited to read:</h5>
+      <ul class="thumbnails">
+        <% @feedbacks.each do |feedback| -%>
+          <li class="span4" style="padding-bottom:40px;">
+            <%= render :partial => "document", :object => feedback -%>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="span4">
+      <h5>You volunteered to read:</h5>
+      <% @volunteers.each do |volunteer| -%>
+      <p><i><%= volunteer.document.title -%></i> on <%= Date.parse(volunteer.created_at.to_s(:db)) -%></p>
+      <% end -%>
+    </div>
+  </div>
 </div>

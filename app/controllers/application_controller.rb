@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => exception.message
-  end
+  include Pundit
 
   helper_method :current_user
 
@@ -25,4 +23,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def unauthorized
+    redirect_to "/", :alert => "Unauthorized."
+  end
 end
