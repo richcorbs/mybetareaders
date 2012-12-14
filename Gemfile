@@ -4,6 +4,7 @@ gem 'rails', '3.2.8'
 gem 'capistrano'
 gem 'capistrano-ext'
 gem 'pundit'
+gem 'puma'
 #gem 'devise'
 
 # Bundle edge Rails instead:
