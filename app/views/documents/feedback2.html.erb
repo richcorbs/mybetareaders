@@ -5,6 +5,12 @@
     <button class="btn btn-large btn-success i_am_done">Click here when you are done providing feedback.</button>
   <% end %>
 
+  <% if current_user == @document.user-%>
+    <p class="pull-right span3"><%= link_to "How to Use Document Reviews", "#how-to-use-reviews", "data-toggle" => "modal" -%></p>
+  <% else -%>
+    <p class="pull-right span3"><%= link_to "How to Review a Document", "#how-to-review", "data-toggle" => "modal" -%></p>
+  <% end -%>
+
   <div class="row">
 
     <div class="span5">
@@ -13,9 +19,10 @@
 
     <div class="span2">
       <% if current_user == @document.user -%>
-        <p class="centered badge <%= @document.overall_rating > 0 ? 'badge-success' : 'badge-warning' -%>" style="margin-top:20px;margin-right:-10px;" title="This value ranges from -1.0 to +1.0.">Overall Rating: <%= "%3.2f" % @document.overall_rating -%></p>
+      <p class="centered badge <%= @document.overall_rating > 0 ? 'badge-success' : 'badge-warning' -%>" style="margin-top:20px;margin-right:-10px;" title="This value ranges from -1.0 to +1.0.">Overall Rating: <%= @document.overall_rating > 0.0 ? '+' : '' -%><%= "%3.2f" % @document.overall_rating -%></p>
       <% end %>
     </div>
+
   </div>
 
   <%= render :partial => "paragraph2", :collection => @document.paragraphs %>
@@ -25,3 +32,9 @@
   <% end %>
 
 </div>
+
+<% if current_user == @document.user -%>
+  <%= render :partial => "how_to_use_reviews" -%>
+<% else -%>
+  <%= render :partial => "how_to_review" -%>
+<% end -%>
