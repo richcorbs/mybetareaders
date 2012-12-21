@@ -1,6 +1,6 @@
+reading project stats, writing project stats, credits
 <div class="row">
-  reading project stats, writing project stats, credits, place to buy credits
-  <div class='span12'>
+  <div class='span4'>
     <h3>Change Password</h3>
     <div class="body-block">
       <%= form_tag '/change_password' do -%>
@@ -11,6 +11,29 @@
         <br />
         <%= submit_tag 'Change Password', :class => 'btn btn-success' -%>
       <% end %>
+    </div>
+  </div>
+  <div class='span4'>
+    <h3>Credit Card</h3>
+    <div class="body-block">
+      <% if current_user.last_4_digits.present? -%>
+        <h5>Your current credit card info:</h5>
+        <p>Your credit card ends in <%= current_user.last_4_digits -%>.</p>
+      <% else -%>
+        <h5>We don't have a credit card on file for you.</h5>
+      <% end %>
+    </div>
+  </div>
+  <div class="span4">
+    <h3>Project Stats</h3>
+    <div class="body-block">
+      <h5>Reading</h5>
+      <p>You have participated in <%= current_user.feedbacks.count -%> reading projects.</p>
+      <% if current_user.feedbacks.count > 0 -%>
+        <p>You have read <%= current_user.feedbacks.inject{|sum,x| sum+x.document.word_count}.sum -%> words.</p>
+      <% end -%>
+      <h5>Writing</h5>
+      <p>You have <%= current_user.documents.count -%> writing projects.</p>
     </div>
   </div>
 </div>

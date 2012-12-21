@@ -11,10 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206122522) do
+ActiveRecord::Schema.define(:version => 20121221122324) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "charges", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "document_id"
+    t.string   "stripe_charge_id"
+    t.integer  "amount",           :default => 0
+    t.integer  "amount_refunded",  :default => 0
+    t.integer  "stripe_fee"
+    t.string   "failure_message"
+    t.boolean  "paid",             :default => false
+    t.boolean  "refunded",         :default => false
+    t.string   "coupon"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "coupons", :force => true do |t|
+    t.string   "code"
+    t.integer  "amount"
+    t.integer  "percent"
+    t.boolean  "active"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -42,14 +66,18 @@ ActiveRecord::Schema.define(:version => 20121206122522) do
     t.integer  "genre_id"
     t.date     "deadline"
     t.boolean  "fiction"
-    t.boolean  "comments_private",  :default => true
-    t.boolean  "accept_volunteers", :default => true
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.boolean  "comments_private",                   :default => true
+    t.boolean  "accept_volunteers",                  :default => true
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.integer  "sentence_count"
     t.integer  "syllable_count"
     t.integer  "word_count"
     t.string   "book_icon_color"
+    t.boolean  "active"
+    t.boolean  "paid"
+    t.integer  "word_count_three_or_more_syllables"
+    t.integer  "cost"
   end
 
   create_table "feedbacks", :force => true do |t|
@@ -115,7 +143,9 @@ ActiveRecord::Schema.define(:version => 20121206122522) do
     t.boolean  "admin"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-    t.integer  "credit",              :default => 0
+    t.integer  "credit_dollars",      :default => 0
+    t.string   "last_4_digits"
+    t.string   "stripe_customer_id"
   end
 
   add_index "users", ["reading_preferences"], :name => "users_gin_reading_preferences"

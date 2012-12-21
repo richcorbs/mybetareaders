@@ -1,5 +1,9 @@
 Mybetareaders::Application.routes.draw do
 
+  resources :coupons
+
+  resources :charges
+
   resources :audiences
   resources :criteria
   resources :genres
@@ -12,16 +16,17 @@ Mybetareaders::Application.routes.draw do
   get 'how_it_works' => "pages#how_it_works"
   get 'pricing' => "pages#pricing"
 
-  get 'whats_hot' => 'documents#whats_hot', :as => :user_home
   get 'documents/:id/feedback' => 'documents#feedback', :as => :feedback
+  get 'documents/:id/pay_for_document' => "documents#pay_for_document", :as => :pay_for_document
   get 'documents/:id/readers' => 'documents#readers', :as => :document_readers
   get 'documents/:id/volunteers' => 'documents#volunteers', :as => :document_volunteers
   get "login" => "sessions#new"
   get "logout" => "sessions#destroy"
   get 'my_reading' => 'documents#reading', :as => :reading
   get 'my_writing' => 'documents#writing', :as => :writing
-  get 'signup' => "users#new"
   get 'preferences' => "users#preferences"
+  get 'signup' => "users#new"
+  get 'whats_hot' => 'documents#whats_hot', :as => :user_home
 
   get '/' => 'pages#home'
   get 'features' => 'pages#features'
@@ -29,16 +34,17 @@ Mybetareaders::Application.routes.draw do
 
   delete 'documents/:id/feedback' => 'documents#feedback'
 
+  post '/change_password' => 'users#change_password', :as => :change_password
+  post 'documents/create_feedback' => 'documents#create_feedback'
   post 'documents/feedback_complete' => 'documents#feedback_complete'
   post 'documents/feedback_rating' => 'documents#feedback_rating'
-  post 'feedbacks/:id/decline_invitation' => 'feedbacks#decline_invitation', :as => :decline_invitation
-  post 'documents/writer_flag_paragraph' => 'documents#writer_flag_paragraph'
   post 'documents/:id/invite_volunteer' => 'documents#invite_volunteer', :as => :document_invite_volunteer
+  post 'documents/:id/pay_for_document' => "documents#pay_for_document"
   post 'documents/volunteer_now' => 'documents#volunteer_now'
-  post 'documents/create_feedback' => 'documents#create_feedback'
+  post 'documents/writer_flag_paragraph' => 'documents#writer_flag_paragraph'
+  post 'feedbacks/:id/decline_invitation' => 'feedbacks#decline_invitation', :as => :decline_invitation
   post 'paragraph_ratings/create_or_update' => 'paragraph_ratings#create_or_update'
   post 'paragraph_ratings/set_bookmark' => 'paragraph_ratings#set_bookmark'
-  post '/change_password' => 'users#change_password', :as => :change_password
 
   put 'users/:id/preferences_update' => 'users#preferences_update'
 

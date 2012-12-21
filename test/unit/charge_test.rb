@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PlanTest < ActiveSupport::TestCase
+class ChargeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

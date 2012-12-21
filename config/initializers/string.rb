@@ -9,18 +9,6 @@
 
 class String
 
-  def flesch_ease_scale
-    (206.835 - 1.015 * self.word_count.to_f / self.sentence_count.to_f - 84.6 * self.syllable_count.to_f / self.word_count.to_f).to_i
-  end
-
-  def flesch_kincaid_grade_scale
-    (0.39 * self.word_count.to_f / self.sentence_count.to_f + 11.8 * self.syllable_count.to_f / self.word_count.to_f - 15.59).to_i
-  end
-
-  def fog_scale
-    (0.4 * ( (self.word_count.to_f / self.sentence_count.to_f) + 100.0 * (self.word_count_three_or_more_syllables.to_f / self.word_count.to_f) )).to_i
-  end
-
   def sentence_count
     sentence_count = self.split(/\. |\? |! /).compact.size
   end
@@ -61,14 +49,6 @@ class String
 
   def word_count
     self.split.length
-  end
-
-  def word_syllable_count(word)
-    word.downcase!
-    return 1 if word.length <= 3
-    word.sub!(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
-    word.sub!(/^y/, '')
-    word.scan(/[aeiouy]{1,2}/).size
   end
 
   def word_count_three_or_more_syllables

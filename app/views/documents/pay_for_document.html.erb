@@ -1,0 +1,66 @@
+<% content_for :head do %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+<% end %>
+
+<div id="stripe_error" class="alert alert-error" style="display:none" ></div>
+
+<div class="container">
+  <h3>Pay for Document: <i><%= @document.title.titleize -%></i></h3>
+  <h4>Word Count: <%= @document.word_count -%>, <span class="green">Cost: <%= number_to_currency @document.cost/100.0 -%></span></h4>
+
+  <div class="row">
+    <% if @user.stripe_customer_id.present? -%>
+      <div class="span5">
+        <div class="body-block">
+          <h3>Pay with Existing Credit Card</h3>
+          <hr />
+          <h4>Pay with credit card ending in &ldquo;<%= @user.last_4_digits -%>&rdquo;.</h4>
+          <%= form_tag({:action => 'pay_for_document', :id => @document.id}, :method => :post, :class => 'form form-horizontal') -%>
+            <div class="field">
+              <%= label_tag :coupon, "Promotional Coupon (if any)" %>
+              <%= text_field_tag :coupon %>
+            </div>
+            <%= submit_tag 'Pay with this credit card.', :class => "btn btn-large btn-primary" -%> 
+          </form>
+        </div>
+      </div>
+    <% end -%>
+    <div class="span5">
+      <div class="body-block">
+        <h3>Pay with Different Credit Card</h3>
+        <hr />
+        <%= form_tag({:action => 'pay_for_document', :id => @document.id}, :method => :post, :class => 'card_form form-vertical') -%>
+          <% if @user.stripe_token %>
+            <p>Credit card acceptance is pending.</p>
+          <% else %>
+            <div class="field">
+              <%= label_tag :name, "Name on Card" %>
+              <%= text_field_tag :name, nil, name: nil %>
+            </div>
+            <div class="field">
+              <%= label_tag :card_number, "Card Number" %>
+              <%= text_field_tag :card_number, nil, name: nil %>
+            </div>
+            <div class="field">
+              <%= label_tag :card_code, "Card Security Code (CVV)" %>
+              <%= text_field_tag :card_code, nil, name: nil, class: 'span1' %>
+            </div>
+            <div class="field">
+              <%= label_tag :card_month, "Card Expiration" %>
+              <%= select_month nil, {add_month_numbers: true}, {name: nil, class: 'span2', id: "card_month"} %>
+              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+10}, {name: nil, class: 'span1', id: "card_year"} %>
+            </div>
+            <div class="field">
+              <%= label_tag :coupon, "Promotional Coupon (if any)" %>
+              <%= text_field_tag :coupon %>
+            </div>
+          <% end %>
+          <%= hidden_field_tag :stripe_token %>
+          <%= hidden_field_tag :document_id, @document.id %>
+          <%= submit_tag 'Submit Credit Card', :class => 'btn btn-large btn-primary' %>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

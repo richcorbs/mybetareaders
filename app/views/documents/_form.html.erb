@@ -67,7 +67,7 @@
           <div class="span8">
             <% if @document.paragraphs.count == 0 -%>
             <label>Document Text
-              (approx word count: <span id="word_count">0</span>)
+              (approx word count: <span id="word_count">0</span>, approx cost: $<span id="cost">0.00</span>)
             </label>
               <%= text_area_tag :text, nil, :rows => "10", :class => 'span8' -%>
             <% end %>

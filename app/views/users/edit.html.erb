@@ -1,4 +1,8 @@
-<h1>Editing user</h1>
+<% content_for :head do %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+<% end %>
+
+<h3>Editing user</h3>
 
 <%= render 'form' %>
 

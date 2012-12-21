@@ -23,7 +23,11 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
+  <div class="field">
+    <%= f.label :credit_dollars %>
+    <%= f.text_field :credit_dollars, :class => 'span1' %>
+  </div>
   <div class="actions">
-    <%= f.submit "Sign Me Up", :class => 'btn btn-large btn-success' %>
+    <%= f.submit :class => 'btn btn-large btn-success' %>
   </div>
 <% end %>

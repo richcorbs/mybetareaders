@@ -15,6 +15,16 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <b>Last 4:</b>
+  <%= @user.last_4_digits %>
+</p>
+
+<p>
+  <b>Stripe ID:</b>
+  <%= @user.stripe_customer_id %>
+</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

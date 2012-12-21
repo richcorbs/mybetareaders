@@ -1,0 +1,25 @@
+<h1>Listing coupons</h1>
+
+<table class="table">
+  <tr>
+    <th>Code</th>
+    <th>Amount</th>
+    <th>Percent</th>
+    <th>Active</th>
+    <th></th>
+  </tr>
+
+  <% @coupons.each do |coupon| %>
+    <tr>
+      <td><%= coupon.code %></td>
+      <td><%= coupon.amount.present? ? "#{coupon.amount} (in pennies)" : '' %></td>
+      <td><%= coupon.percent.present? ? "#{coupon.percent}%" : '' %></td>
+      <td><%= coupon.active %></td>
+      <td><%= link_to 'Show', coupon %> | <%= link_to 'Edit', edit_coupon_path(coupon) %> | <%= link_to 'Destroy', coupon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Coupon', new_coupon_path %>

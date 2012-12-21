@@ -6,9 +6,10 @@
   <!-- <link href='http://fonts.googleapis.com/css?family=Kaushan+Script&text=loopt' rel='stylesheet' type='text/css'> -->
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= yield :head -%>
   <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
+<body class="<%= controller_name %> <%= action_name %>">
 
 <%= render :partial => "shared/navbar" -%>
 

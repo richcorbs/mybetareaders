@@ -141,9 +141,12 @@ $(document).ready ->
       text = $('#text').val()
       if text.length == 0
         word_count = 0
+        cost = '0.00'
       else
         word_count = text.split(' ').length
+        cost = parseInt( word_count / 1000 * <%= Document::COST_PER_THOUSAND_WORDS %>)
       $('#word_count').text(word_count)
+      $('#cost').text(cost + '.00')
 
     $('.i_am_done').click (event) ->
       feedback_id = $('#feedback_id').val()
@@ -155,3 +158,35 @@ $(document).ready ->
           data: '&feedback_id=' + feedback_id
           success: (response) ->
             window.location.replace '/my_reading'
+
+    $(".documents.pay_for_document").ready ->
+      $.externalScript("https://js.stripe.com/v1/").done (script, textStatus) ->
+        Stripe.setPublishableKey $("meta[name=\"stripe-key\"]").attr("content")
+        pay_for_document =
+          setupForm: ->
+            $(".card_form").submit ->
+              $("input[type=submit]").prop "disabled", true
+              pay_for_document.processCard()
+              false
+
+          processCard: ->
+            card = undefined
+            card =
+              name: $("#user_name").val()
+              number: $("#card_number").val()
+              cvc: $("#card_code").val()
+              expMonth: $("#card_month").val()
+              expYear: $("#card_year").val()
+            Stripe.createToken(card, pay_for_document.handleStripeResponse)
+
+          handleStripeResponse: (status, response) ->
+            if status is 200
+              $('#user_stripe_token').val(response.id)
+              $('.card_form')[0].submit()
+            else
+              $('#stripe_error').text(response.error.message).show()
+              return $('input[type=submit]').prop('disabled', false)
+
+        pay_for_document.setupForm()
+
+

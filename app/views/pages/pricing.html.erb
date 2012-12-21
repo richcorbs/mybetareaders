@@ -1,43 +1,8 @@
 <div class="container">
-  <h1>My Beta Readers Pricing</h1>
+  <h1>Pricing</h1>
   <h3>You write. They read.</h3>
-  <div class="row">
-    <div class="body-block prices span2" style="margin-top:30px;">
-      <div class="body-box green">
-        <p>Free</p>
-      </div>
-      <br />
-      <p class="centered">Up to 2,000 words</p>
-      <p class="centered">1 document at a time</p>
-      <h3 class="centered">Free</h3>
-    </div>
-    <div class="body-block prices span2" style="margin-top:30px;">
-      <div class="body-box blue">
-        <p>Small</p>
-      </div>
-      <br />
-      <p class="centered">Up to 5,000 words</p>
-      <p class="centered">Unlimited documents</p>
-      <h3 class="centered">$5</h3>
-    </div>
-    <div class="body-block prices span2" style="margin-top:30px;">
-      <div class="body-box yellow">
-        <p>Medium</p>
-      </div>
-      <br />
-      <p class="centered">Up to 20,000 words</p>
-      <p class="centered">Unlimited documents</p>
-      <h3 class="centered">$10</h3>
-    </div>
-    <div class="body-block prices span2" style="margin-top:30px;">
-      <div class="body-box orange">
-        <p>Large</p>
-      </div>
-      <br />
-      <p class="centered">Up to 100,000 words</p>
-      <p class="centered">Unlimited documents</p>
-      <h3 class="centered">$20</h3>
-    </div>
+  <div class="hero-unit body-block centered green" style="padding:100px 0;">
+    <h1><%= number_to_currency Document::COST_PER_THOUSAND_WORDS -%> / 1,000 words</h1>
   </div>
-  <p style="padding-top:50px;"><i class="icon-arrow-right"></i> Choose the free plan to sign up for reading-only.</p>
+  <h4 class="span6 offset3 centered">Really. That's it. Up to 1,000 words is free. After that you pay just <%= number_to_currency Document::COST_PER_THOUSAND_WORDS -%> per 1,000 words. After you've pasted in the text of your document we display how many words there are and how much it will cost. We always round down to the nearest thousand.</h4>
 </div>

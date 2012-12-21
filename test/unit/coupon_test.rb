@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AudienceTest < ActiveSupport::TestCase
+class CouponTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

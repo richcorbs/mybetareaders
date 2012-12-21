@@ -5,7 +5,7 @@ gem 'capistrano'
 gem 'capistrano-ext'
 gem 'pundit'
 gem 'puma', '2.0.0.b4'
-#gem 'devise'
+gem 'stripe'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

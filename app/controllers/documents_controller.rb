@@ -46,10 +46,16 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(params[:document])
+    @document.calculate_stats_from_params_text(params[:text])
     @document.user = current_user
+    @document.cost = @document.calculate_cost_from_word_count
 
     respond_to do |format|
       if @document.save
+        if @document.cost == 0 && @document.word_count < 1000
+          @document.mark_as_paid
+          flash[:notice] = "'#{@document.title.titleize}' has been marked as 'paid' since it was less than 1000 words."
+        end
         params[:text].gsub!(/\r\n\r\n/,'\r\n')
         paragraphs = params[:text].split('\r\n')
         paragraphs.each do |paragraph|
@@ -200,6 +206,45 @@ class DocumentsController < ApplicationController
     @feedback = Feedback.create( :user_id => @volunteer.user_id, :document_id => @volunteer.document_id )
     @volunteer.update_attributes( :invited => true )
     redirect_to :back
+  end
+
+  def pay_for_document
+    @user = current_user
+    @document = Document.find(params[:id])
+
+    if @document.cost == 0 && @document.word_count < 1000
+      @document.mark_as_paid
+      flash[:notice] = "'#{@document.title.titleize}' has been marked as 'paid' since it was less than 1000 words."
+      redirect_to :action => :writing
+    end
+
+    return if request.method == 'GET'
+
+    if params[:submit] != "Pay with this credit card."
+      @user.update_attributes(params[:user])
+    end
+
+    @user.reload
+    cost = params[:coupon].present? ? @document.calculate_discounted_cost(params[:coupon]) : @document.cost
+    if cost > 50
+      stripe_charge = Stripe::Charge.create(
+                 :amount => cost,
+                 :currency => 'usd',
+                 :customer => @user.stripe_customer_id,
+                 :description => "mybetareaders.com charge for document #{@document.id}")
+      charge = Charge.new_from_stripe_charge(@document.id, stripe_charge, current_user, params[:coupon])
+      #<Stripe::Charge:0x3fc6800627d8 id=ch_0x4MvWU6UlQMzW> JSON: {"id":"ch_0x4MvWU6UlQMzW","amount":200,"amount_refunded":0,"created":1356013356,"currency":"usd","customer":"cus_0x35t3fg4eUy2o","description":"mybetareaders.com charge for document 5","dispute":null,"failure_message":null,"fee":36,"invoice":null,"livemode":false,"object":"charge","paid":true,"refunded":false,"card":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"country":"JP","cvc_check":"pass","exp_month":12,"exp_year":2012,"fingerprint":"fKWNh904PKFHob6K","last4":"0000","name":"undefined","object":"card","type":"JCB"},"fee_details":[{"type":"stripe_fee","amount":36,"application":null,"currency":"usd","description":"Stripe processing fees"}]}
+      if stripe_charge.paid == true
+        @document.update_attributes(:paid => true)
+        flash[:notice] = "Thank you for your payment for \"#{@document.title.titleize}\"."
+        redirect_to :action => :writing, :id => @document
+      else
+        flash[:notice] = "Your payment failed: #{stripe_charge.failure_message}"
+      end
+    else
+      charge = Charge.new_for_free_document(@document, current_user)
+    end
+
   end
 
   private
