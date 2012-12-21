@@ -34,13 +34,13 @@ class Document < ActiveRecord::Base
   end
 
   def credit_to_apply(cost)
-    credit_cents = user.credit_dollars * 100
+    credit_cents = user.credit_cents
     if credit_cents >= cost
       credit = cost
-      user.update_attributes(:credit_dollars => (credit_cents - cost)/100.0)
-    elsif user.credit_dollars > 0
+      user.update_attributes(:credit_cents => (credit_cents - cost))
+    elsif credit_cents > 0
       credit = credit_cents
-      user.update_attributes(:credit_dollars => 0.0)
+      user.update_attributes(:credit_cents => 0)
     end
     credit
   end

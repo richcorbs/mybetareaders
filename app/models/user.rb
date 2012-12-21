@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   serialize :reading_preferences, ActiveRecord::Coders::Hstore
 
-  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :credit_dollars, :stripe_token, :coupon
+  attr_accessible :email, :first_name, :last_name, :password, :password_confirmation, :credit_cents, :stripe_token, :coupon
   attr_accessor :password, :stripe_token, :coupon
 
   before_save :encrypt_password
