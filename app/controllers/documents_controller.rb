@@ -175,7 +175,11 @@ class DocumentsController < ApplicationController
 
   def whats_hot
     authorize Document
-    @documents = Document.order("id desc").where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
+    if current_user.volunteers.count > 0
+      @documents = Document.order("id desc").where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
+    else
+      @documents = Document.order("id desc").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
+    end
   end
 
   def reading
