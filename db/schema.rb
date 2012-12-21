@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221122324) do
+ActiveRecord::Schema.define(:version => 20121221144227) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20121221122324) do
     t.string   "coupon"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.integer  "credit_applied"
   end
 
   create_table "coupons", :force => true do |t|
@@ -143,9 +144,9 @@ ActiveRecord::Schema.define(:version => 20121221122324) do
     t.boolean  "admin"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
-    t.integer  "credit_dollars",      :default => 0
     t.string   "last_4_digits"
     t.string   "stripe_customer_id"
+    t.integer  "credit_cents",        :default => 0
   end
 
   add_index "users", ["reading_preferences"], :name => "users_gin_reading_preferences"

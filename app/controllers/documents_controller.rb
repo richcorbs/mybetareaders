@@ -230,6 +230,8 @@ class DocumentsController < ApplicationController
 
     @user.reload
     cost = params[:coupon].present? ? @document.calculate_discounted_cost(params[:coupon]) : @document.cost
+    cost -= @document.credit_to_apply(cost)
+
     if cost > 50
       stripe_charge = Stripe::Charge.create(
                  :amount => cost,

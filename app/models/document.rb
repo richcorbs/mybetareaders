@@ -33,6 +33,18 @@ class Document < ActiveRecord::Base
     self.word_count_three_or_more_syllables = text.word_count_three_or_more_syllables
   end
 
+  def credit_to_apply(cost)
+    credit_cents = user.credit_dollars * 100
+    if credit_cents >= cost
+      credit = cost
+      user.update_attributes(:credit_dollars => (credit_cents - cost)/100.0)
+    elsif user.credit_dollars > 0
+      credit = credit_cents
+      user.update_attributes(:credit_dollars => 0.0)
+    end
+    credit
+  end
+
   def criteria
     Criterium.where(:fiction => fiction).order(:criterium)
   end
