@@ -1,11 +1,12 @@
 class PagesController < ApplicationController
 
-  before_filter :public_pages, :include => [:how_it_works, :pricing]
+  before_filter :public_pages, :include => [:features, :how_it_works, :pricing]
 
   def create
     authorize Page
     @page = Page.create(:action => params[:page_action], :content => params[:page_content])
-    flash[:notice] = "Page #{@page.action} created."
+    Page.keep_only_ten(params[:page_action])
+    flash[:notice] = "Page \"#{@page.action}\" created/updated."
     redirect_to :action => :index
   end
 
@@ -22,6 +23,7 @@ class PagesController < ApplicationController
   end
 
   def features
+    authorize Page, :public?
   end
 
   def home

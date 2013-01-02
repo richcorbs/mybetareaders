@@ -12,10 +12,6 @@ class PagePolicy < Struct.new(:user, :user2)
     user && user.admin?
   end
 
-  def home?
-    true
-  end
-
   def index?
     user && user.admin?
   end

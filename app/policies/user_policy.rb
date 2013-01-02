@@ -8,6 +8,10 @@ class UserPolicy < Struct.new(:user, :user2)
     user && user.admin?
   end
 
+  def new?
+    true
+  end
+
   def preferences?
     user == user2
   end

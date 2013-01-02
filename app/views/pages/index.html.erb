@@ -3,21 +3,25 @@
 <div class="body-block">
   <table class="table">
     <tr>
-      <th>Action</th>
+      <th>Page</th>
       <th>Content</th>
-      <th></th>
     </tr>
 
   <% @pages.each do |mypage| %>
   <% page = Page.last_page_for_action(mypage.action) -%>
     <tr>
-      <td><%= page.action %></td>
       <td>
-        <div style="width:600px;overflow:hidden;">
+        <%= link_to page.action.titleize, "/#{page.action}" %>
+        <br />
+        <%= link_to 'Edit', edit_page_path(page) %>
+        <br />
+        <%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+      <td>
+        <div style="width:800px;overflow:hidden;">
           <%= raw page.content %>
         </div>
       </td>
-      <td><%= link_to 'Show', page %> | <%= link_to 'Edit', edit_page_path(page) %> | <%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   </table>
