@@ -224,6 +224,8 @@ class DocumentsController < ApplicationController
 
     return if request.method == 'GET'
 
+    redirect_to :action => :writing if @document.paid?
+
     if params[:submit] != "Pay with this credit card."
       @user.update_attributes(params[:user])
     end
@@ -242,10 +244,11 @@ class DocumentsController < ApplicationController
       charge = Charge.new_from_stripe_charge(@document.id, stripe_charge, current_user, params[:coupon])
       #<Stripe::Charge:0x3fc6800627d8 id=ch_0x4MvWU6UlQMzW> JSON: {"id":"ch_0x4MvWU6UlQMzW","amount":200,"amount_refunded":0,"created":1356013356,"currency":"usd","customer":"cus_0x35t3fg4eUy2o","description":"mybetareaders.com charge for document 5","dispute":null,"failure_message":null,"fee":36,"invoice":null,"livemode":false,"object":"charge","paid":true,"refunded":false,"card":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"country":"JP","cvc_check":"pass","exp_month":12,"exp_year":2012,"fingerprint":"fKWNh904PKFHob6K","last4":"0000","name":"undefined","object":"card","type":"JCB"},"fee_details":[{"type":"stripe_fee","amount":36,"application":null,"currency":"usd","description":"Stripe processing fees"}]}
       charge.update_attributes(:credit_applied => credit) if credit.present?
+      charge.update_attributes(:coupon => params[:coupon]) if params[:coupon].present?
       if stripe_charge.paid == true
         @document.update_attributes(:paid => true)
         flash[:notice] = "Thank you for your payment for \"#{@document.title.titleize}\"."
-        redirect_to :action => :writing, :id => @document
+        redirect_to :action => :writing
       else
         flash[:notice] = "Your payment failed: #{stripe_charge.failure_message}"
       end

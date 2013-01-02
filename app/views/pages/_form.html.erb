@@ -1,0 +1,25 @@
+<%= form_tag "/pages", :method => :post do |f| %>
+  <% if @page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+      <ul>
+      <% @page.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= label_tag :page_action, "Page Name" %><br />
+    <%= text_field_tag :page_action, @page.action %>
+  </div>
+  <div class="field">
+    <%= label_tag :page_content %><br />
+    <%= text_area_tag :page_content, @page.content, :rows => "20", :class => "span8" %>
+  </div>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

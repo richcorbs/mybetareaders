@@ -1,5 +1,5 @@
 class Charge < ActiveRecord::Base
-  attr_accessible :amount, :amount_refunded, :user_id, :document_id, :failure_message, :paid, :refunded, :stripe_charge_id, :stripe_fee
+  attr_accessible :amount, :amount_refunded, :user_id, :document_id, :failure_message, :paid, :refunded, :stripe_charge_id, :stripe_fee, :credit_applied, :coupon
 
   belongs_to :user
   belongs_to :document

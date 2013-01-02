@@ -17,11 +17,12 @@ class Document < ActiveRecord::Base
   end
 
   def calculate_discounted_cost(coupon)
-    coupon = Coupon.where(:code => coupon).first
-    if coupon.percent
+    if coupon && coupon.percent
       discounted_cost = (cost * (1.0 - coupon.percent.to_f / 100.0)).to_i
-    elsif coupon.amount.present?
+    elsif coupon && coupon.amount
       discounted_cost = cost - coupon.amount
+    else
+      discounted_cost = cost
     end
     discounted_cost
   end
@@ -41,6 +42,8 @@ class Document < ActiveRecord::Base
     elsif credit_cents > 0
       credit = credit_cents
       user.update_attributes(:credit_cents => 0)
+    else
+      credit = 0
     end
     credit
   end

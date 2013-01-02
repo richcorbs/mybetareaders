@@ -1,8 +1,1 @@
-<div class="container">
-  <h1>Pricing</h1>
-  <h3>You write. They read.</h3>
-  <div class="hero-unit body-block centered green" style="padding:100px 0;">
-    <h1><%= number_to_currency Document::COST_PER_THOUSAND_WORDS/100.0 -%> / 1,000 words</h1>
-  </div>
-  <h4 class="span6 offset3 centered">Really. That's it. Up to 1,000 words is free. After that you pay just <%= number_to_currency Document::COST_PER_THOUSAND_WORDS/100.0 -%> per 1,000 words. After you've pasted in the text of your document we display how many words there are and how much it will cost. We always round down to the nearest thousand words.</h4>
-</div>
+<%= raw @page.content -%>

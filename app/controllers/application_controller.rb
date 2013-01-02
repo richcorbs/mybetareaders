@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  after_filter :verify_authorized
+
   protect_from_forgery
 
   include Pundit

@@ -1,0 +1,12 @@
+<h3>Editing Page</h3>
+
+<%= render 'form' %>
+
+<h4>PREVIEW</h4>
+<hr />
+<div class="container">
+  <%= raw @page.content -%>
+</div>
+<br />
+<%= link_to 'Show', @page %> |
+<%= link_to 'Back', pages_path %>

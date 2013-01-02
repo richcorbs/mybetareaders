@@ -1,19 +1,19 @@
-<h1>Listing charges</h1>
+<h3>Listing Charges</h3>
 
-<table>
+<div class="body-block">
+<table class="table">
   <tr>
     <th>User</th>
     <th>Document</th>
     <th>Stripe charge</th>
+    <th>Paid</th>
+    <th>Refunded</th>
     <th>Amount</th>
     <th>Amount refunded</th>
     <th>Stripe fee</th>
     <th>Failure message</th>
-    <th>Amount refunded</th>
-    <th>Paid</th>
-    <th>Refunded</th>
-    <th></th>
-    <th></th>
+    <th>Coupon</th>
+    <th>Credit Applied</th>
     <th></th>
   </tr>
 
@@ -22,16 +22,15 @@
     <td><%= charge.user.email %></td>
     <td><%= charge.document.title.titleize %></td>
     <td><%= charge.stripe_charge_id %></td>
+    <td><%= charge.paid %></td>
+    <td><%= charge.refunded %></td>
     <td><%= charge.amount %></td>
     <td><%= charge.amount_refunded %></td>
     <td><%= charge.stripe_fee %></td>
     <td><%= charge.failure_message %></td>
-    <td><%= charge.amount_refunded %></td>
-    <td><%= charge.paid %></td>
-    <td><%= charge.refunded %></td>
-    <td><%= link_to 'Show', charge %></td>
-    <td><%= link_to 'Edit', edit_charge_path(charge) %></td>
-    <td><%= link_to 'Destroy', charge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= charge.coupon %></td>
+    <td><%= charge.credit_applied %></td>
+    <td><%= link_to 'Show', charge %> <%= link_to 'Edit', edit_charge_path(charge) %> <%= link_to 'Destroy', charge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

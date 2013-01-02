@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221144227) do
+ActiveRecord::Schema.define(:version => 20121230090748) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
@@ -94,6 +94,13 @@ ActiveRecord::Schema.define(:version => 20121221144227) do
 
   create_table "genres", :force => true do |t|
     t.string   "genre"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "action"
+    t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

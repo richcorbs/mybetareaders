@@ -21,7 +21,7 @@
               <%= link_to "My Writing Projects", writing_path -%>
             </li>
             <li class="">
-              <a href="preferences">My Preferences</a>
+              <a href="/preferences">My Preferences</a>
             </li>
             <% if current_user.admin? %>
               <li class="dropdown">
@@ -35,6 +35,9 @@
                   </li>
                   <li class="">
                     <a href="<%= genres_path -%>">Genres</a>
+                  </li>
+                  <li class="">
+                    <a href="<%= pages_path -%>">Pages</a>
                   </li>
                   <li class="">
                     <a href="<%= prices_path -%>">Prices</a>

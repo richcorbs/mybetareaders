@@ -14,13 +14,17 @@ reading project stats, writing project stats, credits
     </div>
   </div>
   <div class='span4'>
-    <h3>Credit Card</h3>
+    <h3>Financial Info</h3>
     <div class="body-block">
       <% if current_user.last_4_digits.present? -%>
         <h5>Your current credit card info:</h5>
         <p>Your credit card ends in <%= current_user.last_4_digits -%>.</p>
       <% else -%>
         <h5>We don't have a credit card on file for you.</h5>
+      <% end %>
+      <% if current_user.credit_cents > 0 -%>
+        <h5>Credit</h5>
+        <p>You have <%= number_to_currency current_user.credit_cents/100.0 -%> in credit.</p>
       <% end %>
     </div>
   </div>
@@ -33,7 +37,7 @@ reading project stats, writing project stats, credits
         <p>You have read <%= current_user.feedbacks.inject{|sum,x| sum+x.document.word_count}.sum -%> words.</p>
       <% end -%>
       <h5>Writing</h5>
-      <p>You have <%= current_user.documents.count -%> writing projects.</p>
+      <p>You have <%= current_user.documents.count -%> writing projects (<%= current_user.documents.where(:paid => true).count -%> paid).</p>
     </div>
   </div>
 </div>

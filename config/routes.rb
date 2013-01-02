@@ -1,5 +1,7 @@
 Mybetareaders::Application.routes.draw do
 
+  resources :pages
+
   resources :coupons
 
   resources :charges
