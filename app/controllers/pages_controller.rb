@@ -25,6 +25,7 @@ class PagesController < ApplicationController
   end
 
   def home
+    authorize Page, :public?
   end
 
   def how_it_works
