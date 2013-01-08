@@ -1,68 +1,69 @@
-reading project stats, writing project stats, credits
-<div class="row">
-  <div class='span4'>
-    <h3>Change Password</h3>
-    <div class="body-block">
-      <%= form_tag '/change_password' do -%>
-        <label>Password</label>
-        <%= password_field_tag :password -%>
-        <label>Password Confirm</label>
-        <%= password_field_tag :password_confirm -%>
-        <br />
-        <%= submit_tag 'Change Password', :class => 'btn btn-success' -%>
-      <% end %>
+<div class="container">
+  <div class="row">
+    <div class='span4'>
+      <h3>Change Password</h3>
+      <div class="body-block">
+        <%= form_tag '/change_password' do -%>
+          <label>Password</label>
+          <%= password_field_tag :password -%>
+          <label>Password Confirm</label>
+          <%= password_field_tag :password_confirm -%>
+          <br />
+          <%= submit_tag 'Change Password', :class => 'btn btn-success' -%>
+        <% end %>
+      </div>
+    </div>
+    <div class='span4'>
+      <h3>Financial Info</h3>
+      <div class="body-block">
+        <% if current_user.last_4_digits.present? -%>
+          <h5>Your current credit card info:</h5>
+          <p>Your credit card ends in <%= current_user.last_4_digits -%>.</p>
+        <% else -%>
+          <h5>We don't have a credit card on file for you.</h5>
+        <% end %>
+        <% if current_user.credit_cents > 0 -%>
+          <h5>Credit</h5>
+          <p>You have <%= number_to_currency current_user.credit_cents/100.0 -%> in credit.</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="span4">
+      <h3>Project Stats</h3>
+      <div class="body-block">
+        <h5>Reading</h5>
+        <p>You have participated in <%= current_user.feedbacks.count -%> reading projects.</p>
+        <% if current_user.feedbacks.count > 0 -%>
+        <p>You have read <%= current_user.feedbacks.inject{|sum,x| sum+x.document.word_count}.sum if current_user.feedback.size > 0 -%> words.</p>
+        <% end -%>
+        <h5>Writing</h5>
+        <p>You have <%= current_user.documents.count -%> writing projects (<%= current_user.documents.where(:paid => true).count -%> paid).</p>
+      </div>
     </div>
   </div>
-  <div class='span4'>
-    <h3>Financial Info</h3>
-    <div class="body-block">
-      <% if current_user.last_4_digits.present? -%>
-        <h5>Your current credit card info:</h5>
-        <p>Your credit card ends in <%= current_user.last_4_digits -%>.</p>
-      <% else -%>
-        <h5>We don't have a credit card on file for you.</h5>
-      <% end %>
-      <% if current_user.credit_cents > 0 -%>
-        <h5>Credit</h5>
-        <p>You have <%= number_to_currency current_user.credit_cents/100.0 -%> in credit.</p>
-      <% end %>
-    </div>
-  </div>
-  <div class="span4">
-    <h3>Project Stats</h3>
-    <div class="body-block">
-      <h5>Reading</h5>
-      <p>You have participated in <%= current_user.feedbacks.count -%> reading projects.</p>
-      <% if current_user.feedbacks.count > 0 -%>
-        <p>You have read <%= current_user.feedbacks.inject{|sum,x| sum+x.document.word_count}.sum -%> words.</p>
-      <% end -%>
-      <h5>Writing</h5>
-      <p>You have <%= current_user.documents.count -%> writing projects (<%= current_user.documents.where(:paid => true).count -%> paid).</p>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="span6">
-    <h3>Reading Preferences</h3>
-    <div class="body-block">
-      <%= form_tag("/users/#{current_user.id}/preferences_update", :method => :put) do -%>
-        <p>These are the types of books you are willing to read.</p>
-        <div class="row">
-          <div class="span2">
-            <h4>Genres</h4>
-            <% Genre.order(:genre).each do |g| -%>
-            <p><%= check_box_tag g.genre, '1', (current_user.reading_preferences[g.genre]=='true') -%> <%= g.genre.titleize -%></p>
-            <% end -%>
+  <div class="row">
+    <div class="span6">
+      <h3>Reading Preferences</h3>
+      <div class="body-block">
+        <%= form_tag("/users/#{current_user.id}/preferences_update", :method => :put) do -%>
+          <p>These are the types of books you are willing to read.</p>
+          <div class="row">
+            <div class="span2">
+              <h4>Genres</h4>
+              <% Genre.order(:genre).each do |g| -%>
+              <p><%= check_box_tag g.genre, '1', (current_user.reading_preferences[g.genre]=='true') -%> <%= g.genre.titleize -%></p>
+              <% end -%>
+            </div>
           </div>
-        </div>
-        <%= submit_tag "Update Reader Preferences", :class => 'btn btn-success' -%>
-      <% end -%>
+          <%= submit_tag "Update Reader Preferences", :class => 'btn btn-success' -%>
+        <% end -%>
+      </div>
     </div>
-  </div>
-  <div class="span6">
-    <h3>Writing Preferences</h3>
-    <div class="body-block">
-      <h4>Stuff</h4>
+    <div class="span6">
+      <h3>Writing Preferences</h3>
+      <div class="body-block">
+        <h4>Stuff</h4>
+      </div>
     </div>
   </div>
 </div>

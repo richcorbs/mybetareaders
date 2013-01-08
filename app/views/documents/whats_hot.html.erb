@@ -1,14 +1,16 @@
-<h3>What's Hot?</h3>
-<ul class="thumbnails">
-  <% if @documents.size > 0 -%>
-    <% @documents.each do |document| -%>
+<div class="container">
+  <h3>What's Hot?</h3>
+  <ul class="thumbnails">
+    <% if @documents.size > 0 -%>
+      <% @documents.each do |document| -%>
+        <li class="span4">
+          <%= render :partial => "document_whats_hot", :object => document -%>
+        </li>
+      <% end %>
+    <% else %>
       <li class="span4">
-        <%= render :partial => "document_whats_hot", :object => document -%>
+        <p>Coming soon. Check back later.</p>
       </li>
-    <% end %>
-  <% else %>
-    <li class="span4">
-      <p>Coming soon. Check back later.</p>
-    </li>
-  <% end -%>
-</ul>
+    <% end -%>
+  </ul>
+</div>

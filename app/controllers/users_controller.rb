@@ -62,6 +62,7 @@ class UsersController < ApplicationController
 
   def change_password
     @user = current_user
+    authorize @user
     if params[:password] == params[:password_confirm]
       @user.password = params[:password]
       @user.save

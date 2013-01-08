@@ -1,5 +1,9 @@
 class UserPolicy < Struct.new(:user, :user2)
 
+  def change_password?
+    user == user2
+  end
+
   def create?
     true
   end
