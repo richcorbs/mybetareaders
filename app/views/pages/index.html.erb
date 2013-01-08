@@ -1,32 +1,39 @@
-<h3>Listing pages</h3>
+<div class="container">
 
-<div class="body-block">
-  <table class="table">
-    <tr>
-      <th>Page</th>
-      <th>Content</th>
-    </tr>
+  <h3>Listing pages</h3>
 
-  <% @pages.each do |mypage| %>
-  <% page = Page.last_page_for_action(mypage.action) -%>
-    <tr>
-      <td>
-        <%= link_to page.action.titleize, "/#{page.action}" %>
-        <br />
-        <%= link_to 'Edit', edit_page_path(page) %>
-        <br />
-        <%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
-      <td>
-        <div style="width:800px;height:100px;overflow:hidden;border:2px solid gray;">
-          <%= raw page.content %>
-        </div>
-      </td>
-    </tr>
-  <% end %>
-  </table>
+  <div class="body-block">
 
-  <br />
+    <p><%= link_to 'New Page', new_page_path %></p>
 
-  <%= link_to 'New Page', new_page_path %>
+    <table class="table">
+      <tr>
+        <th>Page</th>
+        <th>Content</th>
+      </tr>
+
+      <% @pages.each do |mypage| %>
+        <% page = Page.last_page_for_action(mypage) -%>
+        <tr>
+          <td>
+            <%= link_to page.action.titleize, "/#{page.action}" %>
+            <br />
+            <%= link_to 'Edit', edit_page_path(page) %>
+            <br />
+            <%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+          <td>
+            <div style="width:800px !important;position:relative;height:100px;overflow:hidden;border:2px solid gray;">
+              <%= raw page.content %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+
+    </table>
+
+    <p><%= link_to 'New Page', new_page_path %></p>
+
+  </div>
+
 </div>

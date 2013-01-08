@@ -1,9 +1,10 @@
 body {
   background: #f2f2f2 url(/assets/brillant.png) repeat;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: Ubuntu, verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  padding-top:40px;
 }
 
 p, ol, ul, td {
@@ -193,4 +194,72 @@ a.book-icon-link:hover {
 }
 .gray {
   color: #dddddd;
+}
+ul.nav {
+  padding-top:1px;
+}
+.jumbotron {
+  left: 0;
+  position: relative;
+  margin-top: -60px;
+  width: 100%;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+  background: #630057;
+  background: -moz-linear-gradient(45deg,#630057 0%,#00083D 100%);
+  background: -webkit-gradient(linear,left bottom,right top,color-stop(0%,#630057),color-stop(100%,#00083D));
+  background: -webkit-linear-gradient(-45deg,#000947 30%, #4C7BB8 100%);
+  background: -o-linear-gradient(45deg,#000947 30%,#00083D 100%);
+  background: -ms-linear-gradient(45deg,#630057 0%,#00083D 100%);
+  background: linear-gradient(45deg,#630057 30%,#00083D 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#630057',endColorstr='#00083d',GradientType=1);
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2), inset 0 -3px 7px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,0.2), inset 0 -3px 7px rgba(0,0,0,0.2);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2), inset 0 -3px 7px rgba(0, 0, 0, 0.2);
+}
+.jumbotron::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .4;
+}
+.jumbotron h1 {
+  font-family: Ubuntu;
+  font-size: 125px;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.jumbotron h2 {
+  font-family: Ubuntu;
+  font-size: 40px;
+  font-weight: 200;
+  line-height: 40px;
+  padding-top: 30px;
+  text-align: center;
+}
+.jumbotron p {
+  font-family: Ubuntu;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+}
+.brand {
+  font-family: Ubuntu;
+}
+#home {
+  text-align:center;
+  padding: 100px 10px;
+  margin-bottom:0px;
+}
+.home_page_container {
+  padding-top:40px;
+}
+.stripe {
+  padding:30px;
+  text-align: left;
+  width: 100%;
 }

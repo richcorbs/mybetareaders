@@ -27,6 +27,7 @@ class PagesController < ApplicationController
   end
 
   def home
+    @pages = Page.where("action!='home'").order(:action).pluck("distinct(action)")
     authorize Page, :public?
   end
 
@@ -35,7 +36,7 @@ class PagesController < ApplicationController
   end
 
   def index
-    @pages = Page.select("distinct(action)").order(:action)
+    @pages = Page.order(:action).pluck("distinct(action)")
     authorize Page
   end
 

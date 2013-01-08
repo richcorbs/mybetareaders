@@ -48,15 +48,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    authorize User
     @user = User.new(params[:user])
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+        format.html { redirect_to login_path, notice: 'User was successfully created.' }
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { redirect_to signup_path }
       end
     end
   end

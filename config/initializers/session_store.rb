@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-Mybetareaders::Application.config.session_store :cookie_store, key: '_mybetareaders_session'
+Mybetareaders::Application.config.session_store :cookie_store, key: 'this_is_mybetareaders_super_secret_key'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information

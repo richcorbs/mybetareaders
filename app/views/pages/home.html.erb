@@ -1,2 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= raw Page.where(:action => 'home').last.content -%>
+
+<% @pages.each do |page| -%>
+  <%= raw Page.where(:action => page).last.content -%>
+<% end -%>
+
+<div style="height:40px;">&nbsp;</div>

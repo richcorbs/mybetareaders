@@ -8,18 +8,15 @@
   <%= csrf_meta_tags %>
   <%= yield :head -%>
   <link rel="shortcut icon" href="/favicon.ico">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
 </head>
-<body class="<%= controller_name %> <%= action_name %>">
+<body class="<%= controller_name %> <%= action_name %>" data-spy="scroll" data-target=".navbar" data-offset="40">
 
 <%= render :partial => "shared/navbar" -%>
-
-<div class="container" style="margin:55px;">
 
   <%= render "layouts/messages" -%>
 
   <%= yield %>
-
-</div>
 
 </body>
 </html>

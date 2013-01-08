@@ -1,5 +1,9 @@
 class UserPolicy < Struct.new(:user, :user2)
 
+  def create?
+    true
+  end
+
   def edit?
     user == user2 ||  (user && user.admin?)
   end
