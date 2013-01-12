@@ -1,30 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Paragraph:</b>
-  <%= @paragraph_rating.paragraph_id %>
-</p>
+  <p>
+    <b>Paragraph:</b>
+    <%= @paragraph_rating.paragraph_id %>
+  </p>
 
-<p>
-  <b>User:</b>
-  <%= @paragraph_rating.user_id %>
-</p>
+  <p>
+    <b>User:</b>
+    <%= @paragraph_rating.user_id %>
+  </p>
 
-<p>
-  <b>Character:</b>
-  <%= @paragraph_rating.character %>
-</p>
+  <p>
+    <b>Character:</b>
+    <%= @paragraph_rating.character %>
+  </p>
 
-<p>
-  <b>Pace:</b>
-  <%= @paragraph_rating.pace %>
-</p>
+  <p>
+    <b>Pace:</b>
+    <%= @paragraph_rating.pace %>
+  </p>
 
-<p>
-  <b>Plot:</b>
-  <%= @paragraph_rating.plot %>
-</p>
+  <p>
+    <b>Plot:</b>
+    <%= @paragraph_rating.plot %>
+  </p>
 
 
-<%= link_to 'Edit', edit_paragraph_rating_path(@paragraph_rating) %> |
-<%= link_to 'Back', paragraph_ratings_path %>
+  <%= link_to 'Edit', edit_paragraph_rating_path(@paragraph_rating) %> |
+  <%= link_to 'Back', paragraph_ratings_path %>
+</div>

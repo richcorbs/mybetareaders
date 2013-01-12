@@ -1,27 +1,29 @@
-<h1>Listing paragraph_comments</h1>
+<div class="container">
+  <h3>Listing paragraph_comments</h3>
 
-<table>
-  <tr>
-    <th>Paragraph</th>
-    <th>User</th>
-    <th>Comment</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <th>Paragraph</th>
+      <th>User</th>
+      <th>Comment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @paragraph_comments.each do |paragraph_comment| %>
-  <tr>
-    <td><%= paragraph_comment.paragraph_id %></td>
-    <td><%= paragraph_comment.user_id %></td>
-    <td><%= paragraph_comment.comment %></td>
-    <td><%= link_to 'Show', paragraph_comment %></td>
-    <td><%= link_to 'Edit', edit_paragraph_comment_path(paragraph_comment) %></td>
-    <td><%= link_to 'Destroy', paragraph_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <% @paragraph_comments.each do |paragraph_comment| %>
+    <tr>
+      <td><%= paragraph_comment.paragraph_id %></td>
+      <td><%= paragraph_comment.user_id %></td>
+      <td><%= paragraph_comment.comment %></td>
+      <td><%= link_to 'Show', paragraph_comment %></td>
+      <td><%= link_to 'Edit', edit_paragraph_comment_path(paragraph_comment) %></td>
+      <td><%= link_to 'Destroy', paragraph_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Paragraph comment', new_paragraph_comment_path %>
+  <%= link_to 'New Paragraph comment', new_paragraph_comment_path %>
+</div>

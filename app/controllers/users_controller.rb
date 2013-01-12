@@ -112,6 +112,7 @@ class UsersController < ApplicationController
     @user = current_user
     authorize @user
     #@user.reading_preferences = {} if @user.reading_preferences.nil?
+    @user.reading_level = params[:reading_level]
     Genre.all.each do |g|
       @user.reading_preferences[g.genre] = (params[g.genre] && params[g.genre] == '1') ? true : false
     end

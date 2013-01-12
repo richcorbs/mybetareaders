@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121230090748) do
+ActiveRecord::Schema.define(:version => 20130111140543) do
 
   create_table "audiences", :force => true do |t|
     t.string   "audience"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(:version => 20121230090748) do
     t.string   "last_4_digits"
     t.string   "stripe_customer_id"
     t.integer  "credit_cents",        :default => 0
+    t.string   "reading_level"
   end
 
   add_index "users", ["reading_preferences"], :name => "users_gin_reading_preferences"

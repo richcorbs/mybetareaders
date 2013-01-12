@@ -41,6 +41,7 @@ Mybetareaders::Application.routes.draw do
   post 'documents/feedback_complete' => 'documents#feedback_complete'
   post 'documents/feedback_rating' => 'documents#feedback_rating'
   post 'documents/:id/invite_volunteer' => 'documents#invite_volunteer', :as => :document_invite_volunteer
+  post 'documents/:id/uninvite_volunteer' => 'documents#uninvite_volunteer', :as => :document_uninvite_volunteer
   post 'documents/:id/pay_for_document' => "documents#pay_for_document"
   post 'documents/volunteer_now' => 'documents#volunteer_now'
   post 'documents/writer_flag_paragraph' => 'documents#writer_flag_paragraph'

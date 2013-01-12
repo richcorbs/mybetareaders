@@ -1,15 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @paragraph.user_id %>
-</p>
+  <p>
+    <b>User:</b>
+    <%= @paragraph.user_id %>
+  </p>
 
-<p>
-  <b>Text:</b>
-  <%= @paragraph.text %>
-</p>
+  <p>
+    <b>Text:</b>
+    <%= @paragraph.text %>
+  </p>
 
 
-<%= link_to 'Edit', edit_paragraph_path(@paragraph) %> |
-<%= link_to 'Back', paragraphs_path %>
+  <%= link_to 'Edit', edit_paragraph_path(@paragraph) %> |
+  <%= link_to 'Back', paragraphs_path %>
+</div>

@@ -1,27 +1,29 @@
-<h3>Listing Users</h3>
+<div class="container">
+  <h3>Listing Users</h3>
 
-<div class="body-block">
-  <table class="table">
-    <tr>
-      <th>Email</th>
-      <th>Admin?</th>
-      <th>Credit Cents</th>
-      <th>Stripe Customer ID</th>
-      <th></th>
-    </tr>
+  <div class="body-block">
+    <table class="table">
+      <tr>
+        <th>Email</th>
+        <th>Admin?</th>
+        <th>Credit Cents</th>
+        <th>Stripe Customer ID</th>
+        <th></th>
+      </tr>
 
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.email %></td>
-      <td><%= user.admin? %></td>
-      <td><%= user.credit_cents %></td>
-      <td><%= user.stripe_customer_id %></td>
-      <td><div class="pull-right"><%= link_to 'Show', user %> | <%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_user_path(user) %> | <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
-    </tr>
-  <% end %>
-  </table>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.admin? %></td>
+        <td><%= user.credit_cents %></td>
+        <td><%= user.stripe_customer_id %></td>
+        <td><div class="pull-right"><%= link_to 'Show', user %> | <%= link_to (raw "<i class='icon-pencil'></i> Edit"), edit_user_path(user) %> | <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></div></td>
+      </tr>
+    <% end %>
+    </table>
 
-  <br />
+    <br />
 
-  <%= link_to (raw "<i class='icon-plus-sign'></i> New User"), new_user_path, :class => 'btn btn-success' %>
+    <%= link_to (raw "<i class='icon-plus-sign'></i> New User"), new_user_path, :class => 'btn btn-success' %>
+  </div>
 </div>

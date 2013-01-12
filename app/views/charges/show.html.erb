@@ -1,55 +1,57 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Customer:</b>
-  <%= @charge.customer_id %>
-</p>
+  <p>
+    <b>Customer:</b>
+    <%= @charge.customer_id %>
+  </p>
 
-<p>
-  <b>Document:</b>
-  <%= @charge.document_id %>
-</p>
+  <p>
+    <b>Document:</b>
+    <%= @charge.document_id %>
+  </p>
 
-<p>
-  <b>Stripe charge:</b>
-  <%= @charge.stripe_charge_id %>
-</p>
+  <p>
+    <b>Stripe charge:</b>
+    <%= @charge.stripe_charge_id %>
+  </p>
 
-<p>
-  <b>Amount:</b>
-  <%= @charge.amount %>
-</p>
+  <p>
+    <b>Amount:</b>
+    <%= @charge.amount %>
+  </p>
 
-<p>
-  <b>Amount refunded:</b>
-  <%= @charge.amount_refunded %>
-</p>
+  <p>
+    <b>Amount refunded:</b>
+    <%= @charge.amount_refunded %>
+  </p>
 
-<p>
-  <b>Stripe fee:</b>
-  <%= @charge.stripe_fee %>
-</p>
+  <p>
+    <b>Stripe fee:</b>
+    <%= @charge.stripe_fee %>
+  </p>
 
-<p>
-  <b>Failure message:</b>
-  <%= @charge.failure_message %>
-</p>
+  <p>
+    <b>Failure message:</b>
+    <%= @charge.failure_message %>
+  </p>
 
-<p>
-  <b>Amount refunded:</b>
-  <%= @charge.amount_refunded %>
-</p>
+  <p>
+    <b>Amount refunded:</b>
+    <%= @charge.amount_refunded %>
+  </p>
 
-<p>
-  <b>Paid:</b>
-  <%= @charge.paid %>
-</p>
+  <p>
+    <b>Paid:</b>
+    <%= @charge.paid %>
+  </p>
 
-<p>
-  <b>Refunded:</b>
-  <%= @charge.refunded %>
-</p>
+  <p>
+    <b>Refunded:</b>
+    <%= @charge.refunded %>
+  </p>
 
 
-<%= link_to 'Edit', edit_charge_path(@charge) %> |
-<%= link_to 'Back', charges_path %>
+  <%= link_to 'Edit', edit_charge_path(@charge) %> |
+  <%= link_to 'Back', charges_path %>
+</div>

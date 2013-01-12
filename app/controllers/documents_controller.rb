@@ -29,6 +29,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   # GET /documents/new.json
   def new
+    authorize Document
     @document = Document.new
 
     respond_to do |format|
@@ -40,11 +41,13 @@ class DocumentsController < ApplicationController
   # GET /documents/1/edit
   def edit
     @document = Document.find(params[:id])
+    authorize @document
   end
 
   # POST /documents
   # POST /documents.json
   def create
+    authorize Document
     @document = Document.new(params[:document])
     @document.calculate_stats_from_params_text(params[:text])
     @document.user = current_user
@@ -89,7 +92,8 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document = Document.find(params[:id])
-    #@document.destroy
+    authorize @document
+    @document.destroy
 
     respond_to do |format|
       format.html { redirect_to writing_path }
@@ -199,7 +203,7 @@ class DocumentsController < ApplicationController
 
   def volunteers
     @document   = Document.find(params[:id])
-    @volunteers = @document.volunteers
+    @volunteers = @document.volunteers.find(:all, :include => :user, :order => 'users.email')
     authorize @document
   end
 
@@ -209,6 +213,15 @@ class DocumentsController < ApplicationController
     authorize @document
     @feedback = Feedback.create( :user_id => @volunteer.user_id, :document_id => @volunteer.document_id )
     @volunteer.update_attributes( :invited => true )
+    redirect_to :back
+  end
+
+  def uninvite_volunteer
+    @document = Document.find(params[:id])
+    @volunteer = Volunteer.find(params[:volunteer_id])
+    Feedback.where(:user_id => @volunteer.user_id, :document_id => @document.id).first.destroy
+    authorize @document
+    @volunteer.update_attributes( :invited => false )
     redirect_to :back
   end
 

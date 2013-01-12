@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   has_many :paragraph_ratings
   has_many :volunteers
 
+  READING_LEVELS = ['k_to_3', 'grade_4_to_6', 'grade_7_to_9', 'grade_10_to_12', 'college', 'graduate_school']
+
   def self.authenticate( email, password )
     user = User.find_by_email( email )
     if user && (user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt) || password == user.auth_token)
@@ -58,6 +60,10 @@ class User < ActiveRecord::Base
     else
       super
     end
+  end
+
+  def reading_level_formatted
+    reading_level.present? ? reading_level.gsub(/_/,' ') : 'unknown'
   end
 
   def update_stripe

@@ -1,20 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Paragraph:</b>
-  <%= @paragraph_comment.paragraph_id %>
-</p>
+  <p>
+    <b>Paragraph:</b>
+    <%= @paragraph_comment.paragraph_id %>
+  </p>
 
-<p>
-  <b>User:</b>
-  <%= @paragraph_comment.user_id %>
-</p>
+  <p>
+    <b>User:</b>
+    <%= @paragraph_comment.user_id %>
+  </p>
 
-<p>
-  <b>Comment:</b>
-  <%= @paragraph_comment.comment %>
-</p>
+  <p>
+    <b>Comment:</b>
+    <%= @paragraph_comment.comment %>
+  </p>
 
 
-<%= link_to 'Edit', edit_paragraph_comment_path(@paragraph_comment) %> |
-<%= link_to 'Back', paragraph_comments_path %>
+  <%= link_to 'Edit', edit_paragraph_comment_path(@paragraph_comment) %> |
+  <%= link_to 'Back', paragraph_comments_path %>
+</div>

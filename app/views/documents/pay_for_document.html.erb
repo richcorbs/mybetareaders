@@ -2,9 +2,9 @@
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
 <% end %>
 
-<div id="stripe_error" class="alert alert-error" style="display:none" ></div>
 
 <div class="container">
+  <div id="stripe_error" class="alert alert-error" style="display:none" ></div>
   <h3>Pay for Document: <i><%= @document.title.titleize -%></i></h3>
   <h4>Word Count: <%= @document.word_count -%>, <span class="green">Cost: <%= number_to_currency @document.cost/100.0 -%></span></h4>
 

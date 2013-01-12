@@ -1,5 +1,5 @@
-<h3>Volunteers to read <em><%= @document.title -%></em></h3>
 <div class="container">
+  <h3>Volunteers to read <em><%= @document.title -%></em></h3>
   <div class="body-block">
     <% if @volunteers.size > 0 -%>
       <table class="table">
@@ -7,6 +7,7 @@
           <tr>
             <th>Volunteer</th>
             <th>Projects Completed</th>
+            <th>Reading Level</th>
             <th>Average Rating</th>
             <th></th>
           </tr>
@@ -14,8 +15,9 @@
         <tbody>
           <% @volunteers.each do |volunteer| -%>
             <tr>
-              <td><i class="icon-user"></i> <%= volunteer.user.email -%></td>
+              <td><%= volunteer.user.email -%><%= raw " (<span class='green'><i class='icon-ok'></i></span> invited)" if volunteer.invited? -%></td>
               <td><%= volunteer.user.feedbacks.where(:accepted_by_user => true).count -%></td>
+              <td><%= volunteer.user.reading_level_formatted -%></td>
               <td>
                 <% stars = volunteer.user.feedbacks.average(:reader_rating) -%>
                 <% 1.upto(5) do |i| -%>
@@ -24,9 +26,9 @@
               </td>
               <td>
                 <% if !volunteer.invited? -%>
-                  <%= link_to "Invite this user", document_invite_volunteer_path(volunteer.id), :method => :post, :class => "btn btn-mini btn-success" -%></td>
+                <%= link_to (raw "<i class='icon-plus-sign'></i> Invite this user"), document_invite_volunteer_path(volunteer.id), :method => :post, :class => "btn btn-mini" -%></td>
                 <% else -%>
-                <p><i class="icon-ok" style="color:green;"></i> Invited</p>
+                  <%= link_to (raw "<i class='icon-minus-sign'></i> Uninvite this user"), document_uninvite_volunteer_path({:volunteer_id => volunteer.id, :id => @document.id}), :method => :post, :class => "btn btn-mini" -%></td>
                 <% end -%>
             </tr>
           <% end %>

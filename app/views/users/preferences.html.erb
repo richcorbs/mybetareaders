@@ -46,10 +46,13 @@
       <h3>Reading Preferences</h3>
       <div class="body-block">
         <%= form_tag("/users/#{current_user.id}/preferences_update", :method => :put) do -%>
-          <p>These are the types of books you are willing to read.</p>
+          <h4>Reading Level</h4>
+          <p>This is your estimated reading level by grade.</p>
+          <%= select_tag :reading_level, options_for_select(User::READING_LEVELS.collect{|rl| [rl.gsub(/_/,' '), rl]}, current_user.reading_level) %>
           <div class="row">
-            <div class="span2">
+            <div class="span4">
               <h4>Genres</h4>
+              <p>These are the types of books you are willing to read.</p>
               <% Genre.order(:genre).each do |g| -%>
               <p><%= check_box_tag g.genre, '1', (current_user.reading_preferences[g.genre]=='true') -%> <%= g.genre.titleize -%></p>
               <% end -%>

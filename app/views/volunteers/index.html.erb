@@ -1,21 +1,23 @@
-<h1>Listing volunteers</h1>
+<div class="container">
+  <h3>Listing volunteers</h3>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @volunteers.each do |volunteer| %>
-  <tr>
-    <td><%= link_to 'Show', volunteer %></td>
-    <td><%= link_to 'Edit', edit_volunteer_path(volunteer) %></td>
-    <td><%= link_to 'Destroy', volunteer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <% @volunteers.each do |volunteer| %>
+    <tr>
+      <td><%= link_to 'Show', volunteer %></td>
+      <td><%= link_to 'Edit', edit_volunteer_path(volunteer) %></td>
+      <td><%= link_to 'Destroy', volunteer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Volunteer', new_volunteer_path %>
+  <%= link_to 'New Volunteer', new_volunteer_path %>
+</div>
