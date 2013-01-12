@@ -104,8 +104,10 @@ class UsersController < ApplicationController
   def preferences
     @user = current_user
     authorize @user
-    @user.reading_preferences = {} if @user.reading_preferences.nil?
-    @user.save
+    if @user.reading_preferences.nil?
+      @user.reading_preferences = {}
+      @user.save
+    end
   end
 
   def preferences_update

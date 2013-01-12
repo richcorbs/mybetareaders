@@ -105,4 +105,14 @@ class User < ActiveRecord::Base
     false
   end
 
+  def words_read
+    word_count = 0
+    fbs = feedbacks.where(:reader_feedback_complete => true)
+    if fbs.count > 0
+      fbs.each do |fb|
+        word_count += fb.document.word_count
+      end
+    end
+    word_count
+  end
 end

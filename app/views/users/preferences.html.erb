@@ -34,7 +34,7 @@
         <h5>Reading</h5>
         <p>You have participated in <%= current_user.feedbacks.count -%> reading projects.</p>
         <% if current_user.feedbacks.count > 0 -%>
-        <p>You have read <%= current_user.feedbacks.inject{|sum,x| sum+x.document.word_count}.sum if current_user.feedback.size > 0 -%> words.</p>
+        <p>You have read <%= current_user.words_read -%> words.</p>
         <% end -%>
         <h5>Writing</h5>
         <p>You have <%= current_user.documents.count -%> writing projects (<%= current_user.documents.where(:paid => true).count -%> paid).</p>
