@@ -42,8 +42,8 @@ class ParagraphCommentsController < ApplicationController
   def create
     @paragraph_comment = ParagraphComment.new(params[:paragraph_comment])
     @document          = @paragraph_comment.paragraph.document
+    authorize @paragraph_comment
     @paragraph_comment.user_id = current_user.id
-
 
     respond_to do |format|
       if @paragraph_comment.save

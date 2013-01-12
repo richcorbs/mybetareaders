@@ -73,6 +73,7 @@ class ParagraphRatingsController < ApplicationController
     @paragraph = Paragraph.find(params[:paragraph_id])
     @document  = @paragraph.document
     @feedback  = Feedback.find_by_user_id_and_document_id( current_user.id, @document.id )
+    authorize @feedback
     if @feedback.bookmark == @paragraph.id
       @feedback.bookmark = nil
       render :text => "remove"

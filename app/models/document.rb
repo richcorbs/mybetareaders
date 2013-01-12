@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
   has_many :volunteers, :dependent => :destroy
 
   validates_presence_of :title
-  validates_presence_of :fiction
+  validates_inclusion_of :fiction, :in => [true, false]
   validates_presence_of :description
 
   COST_PER_THOUSAND_WORDS = 100

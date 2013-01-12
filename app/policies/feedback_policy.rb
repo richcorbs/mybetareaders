@@ -12,4 +12,8 @@ class FeedbackPolicy < Struct.new(:user, :feedback)
     user.present? && feedback.document.user == user
   end
 
+  def set_bookmark?
+    user && feedback.user == user
+  end
+
 end
