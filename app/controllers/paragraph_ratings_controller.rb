@@ -55,6 +55,7 @@ class ParagraphRatingsController < ApplicationController
 
   def create_or_update
     @paragraph_rating = ParagraphRating.find_or_create_by_paragraph_id_and_user_id(params[:paragraph_id], current_user.id)
+    authorize @paragraph_rating
     @criteria         = @paragraph_rating.paragraph.document.criteria
     if @paragraph_rating.ratings.blank?
       @paragraph_rating.ratings = {}

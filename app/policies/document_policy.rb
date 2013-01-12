@@ -21,7 +21,7 @@ class DocumentPolicy < Struct.new(:user, :document)
   end
 
   def feedback?
-    feedback = document.feedbacks.find_by_user_id(user.id).first
+    feedback = document.feedbacks.find_by_user_id(user.id)
     owned? || (user && feedback.present? && feedback.accepted_by_user != false)
   end
 

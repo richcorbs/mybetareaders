@@ -18,7 +18,7 @@
       <%= link_to (image_tag "book-icon-ghost.png", :width => 150, :style => "background-color: white;"), pay_for_document_path(:id => doc), :class => "book-icon-link" -%>
     <% end -%>
   <% else -%>
-    <%= image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color}" -%>
+    <%= link_to (image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color}"), feedback_path(doc.id) -%>
   <% end -%>
   <p><%= link_to "About This Document", "#readability_#{doc.id}", :class => "smaller", :style => "padding:3px;", "data-toggle" => "modal" -%></p>
   <div class="btn-group">
