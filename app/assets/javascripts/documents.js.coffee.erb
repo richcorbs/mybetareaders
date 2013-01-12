@@ -144,7 +144,9 @@ $(document).ready ->
         cost = '0.00'
       else
         word_count = text.split(' ').length
-        cost = parseInt( word_count / 1000 * <%= Document::COST_PER_THOUSAND_WORDS %>)
+        cost = parseInt( word_count / 1000 * <%= Document::COST_PER_THOUSAND_WORDS %> / 100)
+        if word_count < 2000
+          cost = 0
       $('#word_count').text(word_count)
       $('#cost').text(cost + '.00')
 

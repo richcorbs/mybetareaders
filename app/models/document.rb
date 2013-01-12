@@ -1,5 +1,6 @@
 class Document < ActiveRecord::Base
   attr_accessible :doctype, :title, :user_id, :book_icon_color, :description, :deadline, :genre_id, :fiction, :comments_private, :accept_volunteers, :paid, :active, :cost
+
   belongs_to :genre
   belongs_to :user
   has_many :charges
@@ -8,6 +9,10 @@ class Document < ActiveRecord::Base
   has_many :paragraph_comments, :through => :paragraphs
   has_many :paragraph_ratings, :through => :paragraphs
   has_many :volunteers, :dependent => :destroy
+
+  validates_presence_of :title
+  validates_presence_of :fiction
+  validates_presence_of :description
 
   COST_PER_THOUSAND_WORDS = 100
 

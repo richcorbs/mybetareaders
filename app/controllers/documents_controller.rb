@@ -50,6 +50,10 @@ class DocumentsController < ApplicationController
     authorize Document
     @document = Document.new(params[:document])
     @document.calculate_stats_from_params_text(params[:text])
+    if @document.word_count == 0
+      flash[:notice] = "You need to include the text of your document."
+      redirect_to :back and return if @document.word_count == 0
+    end
     @document.user = current_user
     @document.cost = @document.calculate_cost_from_word_count
 
