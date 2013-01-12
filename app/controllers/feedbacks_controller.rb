@@ -39,6 +39,7 @@ class FeedbacksController < ApplicationController
 
   def decline_invitation
     @feedback = Feedback.find(params[:id])
+    authorize @feedback
     @feedback.update_attributes(:accepted_by_user => false)
     redirect_to :back
   end

@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def average_writer_rating
+    feedbacks.where("reader_feedback_complete = 't' and not reader_rating is null").average(:reader_rating) * 100.0
+  end
+
   def create_auth_token
     self.auth_token = Digest::MD5.hexdigest(self.email + (Time.now + 100.years).to_s) if self.auth_token.blank?
     self.save
@@ -64,6 +68,10 @@ class User < ActiveRecord::Base
 
   def reading_level_formatted
     reading_level.present? ? reading_level.gsub(/_/,' ') : 'unknown'
+  end
+
+  def reading_projects_completed
+    feedbacks.where(:reader_feedback_complete => true).count
   end
 
   def update_stripe

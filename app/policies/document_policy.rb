@@ -15,11 +15,14 @@ class DocumentPolicy < Struct.new(:user, :document)
   def destroy?
     user.present? && owned?
   end
+
   def edit?
     (user && document.user_id == user.id) || (user && user.admin?)
   end
+
   def feedback?
-    owned? || (user && document.feedbacks.find_by_user_id(user.id).present?)
+    feedback = document.feedbacks.find_by_user_id(user.id).first
+    owned? || (user && feedback.present? && feedback.accepted_by_user != false)
   end
 
   def feedback_complete?

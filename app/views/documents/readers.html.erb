@@ -29,10 +29,14 @@
       <% end %>
     </div>
     <div class="span3 body-block">
-      <%= form_tag feedbacks_path, :class => 'form form-horizontal', :style => "margin-bottom:0;" do -%>
-        <p>Invite random reader(s) that match your document's audience and genre.</p>
-        <%= select_tag :qty, options_for_select(1..25), :class => "input input-mini" -%> <%= submit_tag "Invite Random Readers", :class => 'btn btn-success' -%>
-      <% end %>
+      <h4>Recommended Readers</h4>
+      <% @document.recommended_readers.each do |rr| -%>
+        <h5><%= rr.email -%></h5>
+        <p>&nbsp;&nbsp;<%= rr.reading_level -%></p>
+        <p>&nbsp;&nbsp;<%= rr.reading_projects_completed -%></p>
+        <p>&nbsp;&nbsp;<%= rr.average_writer_rating -%></p>
+        <p>&nbsp;&nbsp;<%= link_to (raw "<i class='icon-plus-sign'></i> Invite"), "#", :class => 'btn btn-mini' -%></p>
+      <% end -%>
     </div>
   </div>
 </div>

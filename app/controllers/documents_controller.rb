@@ -132,9 +132,13 @@ class DocumentsController < ApplicationController
     authorize @document
 
     @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user)
-    @feedback.update_attributes(:accepted_by_user => true) if (@feedback.present?)
-    @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
-    render 'feedback2'
+    if @feedback.accepted_by_user == false
+      redirect_to :reading and return
+    else
+      @feedback.update_attributes(:accepted_by_user => true) if (@feedback.present?)
+      @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
+      render 'feedback2'
+    end
   end
 
   def feedback_complete
@@ -192,7 +196,7 @@ class DocumentsController < ApplicationController
 
   def reading
     authorize Document
-    @feedbacks = current_user.feedbacks.all(:include => :document, :order => 'id desc')
+    @feedbacks = current_user.feedbacks.all(:conditions => "accepted_by_user != false", :include => :document, :order => 'id desc')
     if @feedbacks.size > 0
       @volunteers = current_user.volunteers.all(:conditions => "document_id not in (#{@feedbacks.collect(&:document_id).join(',')})", :include => :document, :order => 'id desc')
     else

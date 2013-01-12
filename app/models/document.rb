@@ -85,6 +85,10 @@ class Document < ActiveRecord::Base
     self.save
   end
 
+  def recommended_readers
+    User.where("reading_preferences @> (:key => :value)", :key => genre.genre, :value => "true")
+  end
+
   def text
     paragraphs.collect(&:text).join(' ')
   end
