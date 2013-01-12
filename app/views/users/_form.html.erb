@@ -23,11 +23,11 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
-  <div class="field">
-    <%= f.label :reading_level %>
-    <%= f.select :reading_level, options_for_select(User::READING_LEVELS.collect{|rl| [rl.gsub(/_/,' '), rl]}) %>
-  </div>
   <% if @user.id.present? -%>
+    <div class="field">
+      <%= f.label :reading_level %>
+      <%= f.select :reading_level, options_for_select(User::READING_LEVELS.collect{|rl| [rl.gsub(/_/,' '), rl]}) %>
+    </div>
     <div class="field">
       <%= f.label :credit_cents %>
       <%= f.text_field :credit_cents, :class => 'span1' %> (in cents)
