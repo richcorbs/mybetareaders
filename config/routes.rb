@@ -25,7 +25,7 @@ Mybetareaders::Application.routes.draw do
   get 'my_writing' => 'documents#writing', :as => :writing
   get 'preferences' => "users#preferences"
   get 'signup' => "users#new"
-  get 'whats_hot' => 'documents#whats_hot', :as => :user_home
+  get 'browse' => 'documents#browse', :as => :user_home
 
   get '/' => 'pages#home'
   get 'features' => 'pages#features'

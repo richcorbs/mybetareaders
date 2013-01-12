@@ -181,12 +181,12 @@ class DocumentsController < ApplicationController
     authorize @document
   end
 
-  def whats_hot
+  def browse
     authorize Document
     if current_user.volunteers.count > 0
-      @documents = Document.order("id desc").where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
+      @documents = Document.where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).order("RANDOM()").limit(12)
     else
-      @documents = Document.order("id desc").where(:accept_volunteers => true).where("user_id != ?", current_user.id).limit(6)
+      @documents = Document.where(:accept_volunteers => true).where("user_id != ?", current_user.id).order("RANDOM()").limit(12)
     end
   end
 

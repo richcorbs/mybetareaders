@@ -1,5 +1,9 @@
 class DocumentPolicy < Struct.new(:user, :document)
 
+  def browse?
+    user.present?
+  end
+
   def create?
     user.present?
   end
@@ -48,10 +52,6 @@ class DocumentPolicy < Struct.new(:user, :document)
 
   def volunteers?
     user.present? && owned?
-  end
-
-  def whats_hot?
-    user.present?
   end
 
   def writing?
