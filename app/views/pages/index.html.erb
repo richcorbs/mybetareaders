@@ -16,7 +16,7 @@
         <% page = Page.last_page_for_action(mypage) -%>
         <tr>
           <td>
-            <%= link_to page.action.titleize, "/#{page.action}" %>
+            <%= link_to page.action.titleize, "/##{page.action}" %>
             <br />
             <%= link_to 'Edit', edit_page_path(page) %>
             <br />

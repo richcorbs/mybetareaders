@@ -14,9 +14,6 @@ Mybetareaders::Application.routes.draw do
   resources :volunteers
 
   get '/' => "pages#home"
-  get "pages/home"
-  get 'how_it_works' => "pages#how_it_works"
-  get 'pricing' => "pages#pricing"
 
   get 'documents/:id/feedback' => 'documents#feedback', :as => :feedback
   get 'documents/:id/pay_for_document' => "documents#pay_for_document", :as => :pay_for_document
