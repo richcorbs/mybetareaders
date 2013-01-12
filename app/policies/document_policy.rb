@@ -4,6 +4,10 @@ class DocumentPolicy < Struct.new(:user, :document)
     user.present?
   end
 
+  def create_feedback?
+    user.present? && owned?
+  end
+
   def destroy?
     user.present? && owned?
   end

@@ -103,7 +103,7 @@ class DocumentsController < ApplicationController
 
   def create_feedback
     @document = Document.find(params[:document_id])
-    authorize! :create_feedback, Document, :message => "You must be the document owner to invite readers."
+    authorize @document
     @user = User.find_or_create_by_email(params[:email])
     @user.create_auth_token if @user.auth_token.blank?
 

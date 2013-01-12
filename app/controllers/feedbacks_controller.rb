@@ -63,6 +63,7 @@ class FeedbacksController < ApplicationController
   # DELETE /feedbacks/1.json
   def destroy
     @feedback = Feedback.find(params[:id])
+    authorize @feedback
     @volunteer = Volunteer.find_by_user_id_and_document_id( @feedback.user_id, @feedback.document_id )
     @volunteer.update_attributes( :invited => false ) if @volunteer
     @feedback.destroy
