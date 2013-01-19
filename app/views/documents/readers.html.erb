@@ -31,11 +31,12 @@
     <div class="span3 body-block">
       <h4>Recommended Readers</h4>
       <% @document.recommended_readers.each do |rr| -%>
+        <hr />
         <h5><%= rr.email -%></h5>
         <p>
           &nbsp;&nbsp;Reading Level: <%= rr.reading_level.titleize -%><br />
           &nbsp;&nbsp;Projects Completed: <%= rr.reading_projects_completed -%><br />
-          &nbsp;&nbsp;Average Rating of Reader: <%= rr.average_writer_rating -%><br />
+          &nbsp;&nbsp;Average Rating of Reader: <%= rr.average_writer_rating -%><br /><br />
           &nbsp;&nbsp;<%= link_to (raw "<i class='icon-plus-sign'></i> Invite"), "#", :class => 'btn btn-mini' -%>
         </p>
       <% end -%>
