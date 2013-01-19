@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   def average_writer_rating
     myfeedbacks = feedbacks.where("reader_feedback_complete = 't' and not reader_rating is null")
-    if myfeedbacks
+    if myfeedbacks.size > 0
       myfeedbacks.average(:reader_rating) * 100.0
     else
       0.0
