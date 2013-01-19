@@ -13,12 +13,12 @@
   <h5 class="<%= "gray" if !doc.paid? -%>"><%= doc.title -%></h5>
   <% if current_user == doc.user -%>
     <% if doc.paid? -%>
-      <%= link_to (image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color}"), edit_document_path(:id => doc), :class => "book-icon-link" -%>
+      <%= link_to (image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color || 'white'}"), edit_document_path(:id => doc), :class => "book-icon-link" -%>
     <% else %>
       <%= link_to (image_tag "book-icon-ghost.png", :width => 150, :style => "background-color: white;"), pay_for_document_path(:id => doc), :class => "book-icon-link" -%>
     <% end -%>
   <% else -%>
-    <%= link_to (image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color}"), feedback_path(doc.id) -%>
+    <%= link_to (image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color || 'white'}"), feedback_path(doc.id) -%>
   <% end -%>
   <p><%= link_to "About This Document", "#readability_#{doc.id}", :class => "smaller", :style => "padding:3px;", "data-toggle" => "modal" -%></p>
   <div class="btn-group">
