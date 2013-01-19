@@ -133,12 +133,13 @@ class DocumentsController < ApplicationController
 
     authorize @document
 
+    @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
+
     @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user)
-    if @feedback.accepted_by_user == false
+    if @feedback && @feedback.accepted_by_user == false
       redirect_to :reading and return
-    else
+    elsif @feedback
       @feedback.update_attributes(:accepted_by_user => true) if (@feedback.present?)
-      @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
       render 'feedback2'
     end
   end
