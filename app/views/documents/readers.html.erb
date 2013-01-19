@@ -32,10 +32,12 @@
       <h4>Recommended Readers</h4>
       <% @document.recommended_readers.each do |rr| -%>
         <h5><%= rr.email -%></h5>
-        <p>&nbsp;&nbsp;Reading Level:<br /><%= rr.reading_level.titleize -%></p>
-        <p>&nbsp;&nbsp;Projects Completed:<br /><%= rr.reading_projects_completed -%></p>
-        <p>&nbsp;&nbsp;Average Rating of Reader:<br /><%= rr.average_writer_rating -%></p>
-        <p>&nbsp;&nbsp;<%= link_to (raw "<i class='icon-plus-sign'></i> Invite"), "#", :class => 'btn btn-mini' -%></p>
+        <p>
+          &nbsp;&nbsp;Reading Level:<%= rr.reading_level.titleize -%><br />
+          &nbsp;&nbsp;Projects Completed:<br /><%= rr.reading_projects_completed -%><br />
+          &nbsp;&nbsp;Average Rating of Reader:<br /><%= rr.average_writer_rating -%><br />
+          &nbsp;&nbsp;<%= link_to (raw "<i class='icon-plus-sign'></i> Invite"), "#", :class => 'btn btn-mini' -%>
+        </p>
       <% end -%>
     </div>
   </div>
