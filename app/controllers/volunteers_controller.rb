@@ -40,11 +40,18 @@ class VolunteersController < ApplicationController
   # POST /volunteers
   # POST /volunteers.json
   def create
-    @volunteer = Volunteer.new(:document_id => params[:id], :user_id => current_user.id)
+    authorize Volunteer
+    @document = Document.find(params[:id])
+
+    if @document.accept_volunteers?
+      @volunteer = Volunteer.find_or_create_by_document_id_and_user_id(@document.id, current_user.id)
+    else
+      redirect_to :back and return
+    end
 
     respond_to do |format|
       if @volunteer.save
-        format.html { redirect_to @volunteer, notice: 'Volunteer was successfully created.' }
+        format.html { redirect_to reading_path, notice: "You have volunteered for \"#{@document.title.titleize}\"." }
         format.json { render json: @volunteer, status: :created, location: @volunteer }
       else
         format.html { render action: "new" }
