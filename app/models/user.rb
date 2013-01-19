@@ -33,7 +33,12 @@ class User < ActiveRecord::Base
   end
 
   def average_writer_rating
-    feedbacks.where("reader_feedback_complete = 't' and not reader_rating is null").average(:reader_rating) * 100.0
+    myfeedbacks = feedbacks.where("reader_feedback_complete = 't' and not reader_rating is null")
+    if myfeedbacks
+      myfeedbacks.average(:reader_rating) * 100.0
+    else
+      0.0
+    end
   end
 
   def create_auth_token

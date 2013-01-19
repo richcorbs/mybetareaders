@@ -81,6 +81,8 @@ class DocumentsController < ApplicationController
   def update
     @document = Document.find(params[:id])
 
+    authorize @document
+
     respond_to do |format|
       if @document.update_attributes(params[:document])
         format.html { redirect_to writing_path, notice: 'Document was successfully updated.' }

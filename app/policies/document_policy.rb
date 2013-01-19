@@ -53,6 +53,10 @@ class DocumentPolicy < Struct.new(:user, :document)
     user.present? && owned?
   end
 
+  def update?
+    user && owned?
+  end
+
   def volunteers?
     user.present? && owned?
   end
