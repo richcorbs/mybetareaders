@@ -10,7 +10,12 @@ class SessionsController < ApplicationController
     user = User.authenticate( params[:email], params[:password] )
     if user
       session[:user_id] = user.id
-      redirect_to user_home_path
+      if user.reading_level.blank? || user.reading_preferences.blank?
+        flash[:notice] = "Please take a moment and complete your reading level and preferences."
+        redirect_to preferences_path
+      else
+        redirect_to user_home_path
+      end
     else
       flash.now.alert = "Invalid username or password."
       render 'new'

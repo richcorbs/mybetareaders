@@ -133,6 +133,11 @@ class DocumentsController < ApplicationController
 
     authorize @document
 
+    if user && (user.reading_level.blank? || user.reading_preferences.index("true").blank?)
+      session[:original_url] = "/documents/#{@document.id}/feedback"
+      redirect_to preferences_path and return
+    end
+
     @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
 
     @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user)

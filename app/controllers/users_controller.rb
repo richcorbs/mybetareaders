@@ -119,6 +119,17 @@ class UsersController < ApplicationController
       @user.reading_preferences[g.genre] = (params[g.genre] && params[g.genre] == '1') ? true : false
     end
     @user.save
-    redirect_to :back
+    if @user.reading_level.present? && @user.reading_preferences.index("true").present?
+      flash[:notice] = "Preferences updated."
+      if session[:original_url]
+        temp = session[:original_url]
+        session.delete(:original_url)
+        redirect_to temp and return
+      end
+      redirect_to user_home_path and return
+    else
+      flash[:notice] = "You must set reading level and at least 1 reading preference."
+      redirect_to :back and return
+    end
   end
 end
