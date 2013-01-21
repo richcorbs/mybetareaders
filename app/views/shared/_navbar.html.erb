@@ -6,7 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="/#home">My Beta Readers</a>
+      <% if current_user %>
+      <a class="brand" href="/browse">My Beta Readers</a>
+      <% else %>
+        <a class="brand" href="/#home">My Beta Readers</a>
+      <% end %>
       <div class="nav-collapse collapse">
         <ul class="nav">
           <% if current_user -%>
