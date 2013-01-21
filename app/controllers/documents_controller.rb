@@ -204,9 +204,9 @@ class DocumentsController < ApplicationController
   def browse
     authorize Document
     if current_user.volunteers.count > 0
-      @documents = Document.where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).where("active = ?", true).order("RANDOM()").limit(12)
+      @documents = Document.where("not id in (#{current_user.volunteers.collect(&:document_id).join(',')})").where(:accept_volunteers => true).where("user_id != ?", current_user.id).where("active = ?", 't').order("RANDOM()").limit(12)
     else
-      @documents = Document.where(:accept_volunteers => true).where("user_id != ?", current_user.id).where("active = ?", true).order("RANDOM()").limit(12)
+      @documents = Document.where(:accept_volunteers => true).where("user_id != ?", current_user.id).where("active = ?", 't').order("RANDOM()").limit(12)
     end
   end
 
