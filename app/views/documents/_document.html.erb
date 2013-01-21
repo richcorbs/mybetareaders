@@ -34,7 +34,12 @@
     <% elsif document.accepted_by_user == false -%>
       <p class='btn btn-mini disabled'>DECLINED</p>
     <% end %>
-    <a href="<%= feedback_path(doc.id) -%>" class="btn btn-mini"><i class="icon-comments"></i> Feedback</a>
+    <% if doc.active? %>
+      <a href="<%= feedback_path(doc.id) -%>" class="btn btn-mini"><i class="icon-comments"></i> Feedback</a>
+    <% else %>
+      <button class="btn btn-mini"><i class="icon-comments"></i> Feedback</button>
+    <% end %>
+
   </div>
 </div>
 
