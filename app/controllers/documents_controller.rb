@@ -124,6 +124,7 @@ class DocumentsController < ApplicationController
 
   def feedback
     @document = Document.find(params[:id])
+
     if !current_user && params[:t]
       user = User.find_by_auth_token(params[:t])
       if user
@@ -132,6 +133,11 @@ class DocumentsController < ApplicationController
     end
 
     authorize @document
+
+    if !@document.active?
+      flash[:notice] = "Sorry, this document is not yet active."
+      redirect_to reading_path
+    end
 
     if user && (user.reading_level.blank? || user.reading_preferences.index("true").blank?)
       session[:original_url] = "/documents/#{@document.id}/feedback"

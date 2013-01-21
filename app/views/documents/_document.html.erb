@@ -10,9 +10,9 @@
   <% if current_user == doc.user -%>
     <div class="pull-right" style="margin-top:-25px;margin-right:-20px;"><%= link_to (raw "<i class='icon-remove'></i>"), "/documents/#{doc.id}", :method => :delete, :confirm => "If you delete this document it will also delete all ratings and comments.  Are you sure?", :class => "delete-book-link" -%></div>
   <% end %>
-  <h5 class="<%= "gray" if !doc.paid? -%>"><%= doc.title -%></h5>
+  <h5 class="<%= "gray" if !doc.active? -%>"><%= doc.title -%></h5>
   <% if current_user == doc.user -%>
-    <% if doc.paid? -%>
+    <% if doc.active? -%>
       <%= link_to (image_tag "book-icon.png", :width => 150, :style => "background-color: #{doc.book_icon_color || 'white'}"), edit_document_path(:id => doc), :class => "book-icon-link" -%>
     <% else %>
       <%= link_to (image_tag "book-icon-ghost.png", :width => 150, :style => "background-color: white;"), pay_for_document_path(:id => doc), :class => "book-icon-link" -%>
