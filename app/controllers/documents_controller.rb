@@ -253,17 +253,21 @@ class DocumentsController < ApplicationController
     @user = current_user
     @document = Document.find(params[:id])
 
+    authorize @document
+
     if @document.cost == 0 && @document.word_count < 1000
       @document.mark_as_paid
+      @document.update_attributes(:active => true)
       flash[:notice] = "'#{@document.title.titleize}' has been marked as 'paid' since it was less than 1000 words."
       redirect_to :action => :writing
     end
 
     return if request.method == 'GET'
 
-    redirect_to :action => :writing if @document.paid?
+    redirect_to(:action => :writing) and return if @document.paid?
 
     if params[:submit] != "Pay with this credit card."
+      @user.stripe_token = params[:stripe_token]
       @user.update_attributes(params[:user])
     end
 
@@ -283,14 +287,16 @@ class DocumentsController < ApplicationController
       charge.update_attributes(:credit_applied => credit) if credit.present?
       charge.update_attributes(:coupon => params[:coupon]) if params[:coupon].present?
       if stripe_charge.paid == true
-        @document.update_attributes(:paid => true)
+        @document.update_attributes(:paid => true, :active => true)
         flash[:notice] = "Thank you for your payment for \"#{@document.title.titleize}\"."
-        redirect_to :action => :writing
+        redirect_to(:action => :writing) and return
       else
         flash[:notice] = "Your payment failed: #{stripe_charge.failure_message}"
+        redirect_to :back and return
       end
     else
       charge = Charge.new_for_free_document(@document, current_user)
+      @document.update_attributes(:paid => true, :active => true)
     end
 
   end

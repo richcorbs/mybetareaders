@@ -24,7 +24,7 @@
       <%= image_tag "book-icon-ghost.png", :width => 150, :style => "background-color: white;" %>
     <% end %>
   <% end -%>
-  <p><%= link_to "About This Document", "#readability_#{doc.id}", :class => "smaller", :style => "padding:3px;", "data-toggle" => "modal" -%></p>
+  <p><%= link_to "About This Document", "#readability_#{doc.id}", :class => "smaller about-this-document", :style => "padding:3px;", "data-toggle" => "modal" -%></p>
   <div class="btn-group">
     <% if doc.user == current_user -%>
       <a href="<%= document_volunteers_path(doc.id) -%>" class="btn btn-mini"><%= doc.volunteers.count -%> <%= "Volunteer".pluralize(doc.volunteers.count) -%></a>

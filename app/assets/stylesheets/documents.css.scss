@@ -76,7 +76,7 @@ label {
 }
 
 .document-block {
-  background:white;border:1px solid #d4d4d4; padding:30px;
+  background:white;border:1px solid #e6e6e6; padding:30px;
 }
 .book-binding {
   height:180px; width:40px;
@@ -125,4 +125,16 @@ a.delete-book-link:hover {
 }
 .align-left {
   text-align: left;
+}
+.about-this-document {
+  color: #777;
+}
+a.about-this-document:hover {
+  background-color:white;
+  color: #777;
+  text-decoration:underline;
+}
+div.alert a.close:hover {
+  text-decoration:none;
+  background-color:inherit;
 }

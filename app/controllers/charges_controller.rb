@@ -2,7 +2,8 @@ class ChargesController < ApplicationController
   # GET /charges
   # GET /charges.json
   def index
-    @charges = Charge.all
+    authorize Charge
+    @charges = Charge.order(:id)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -41,6 +41,10 @@ class DocumentPolicy < Struct.new(:user, :document)
     user && document.user_id == user.id
   end
 
+  def pay_for_document?
+    user && owned?
+  end
+
   def readers?
     user.present? && owned?
   end
