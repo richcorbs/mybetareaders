@@ -28,7 +28,7 @@
   <div class="btn-group">
     <% if doc.user == current_user -%>
       <a href="<%= document_volunteers_path(doc.id) -%>" class="btn btn-mini"><%= doc.volunteers.count -%> <%= "Volunteer".pluralize(doc.volunteers.count) -%></a>
-      <a href="<%= document_readers_path(doc.id) -%>" class="btn btn-mini"><i class="icon-group"></i> Readers</a>
+      <a href="<%= document_readers_path(doc.id) -%>" class="btn btn-mini"><i class="icon-user"></i> Readers</a>
     <% elsif document.accepted_by_user.nil? -%>
       <%= link_to (raw "<i class='icon-remove'></i> Decline Invitation</i>"), decline_invitation_path(document.id), :method => :post, :class => "btn btn-mini" -%>
     <% elsif document.accepted_by_user == false -%>

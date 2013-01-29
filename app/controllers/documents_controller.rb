@@ -139,7 +139,7 @@ class DocumentsController < ApplicationController
       redirect_to reading_path
     end
 
-    if user && (user.reading_level.blank? || user.reading_preferences.index("true").blank?)
+    if user && (user.password_hash.nil? || user.reading_level.blank? || user.reading_preferences.index("true").blank?)
       session[:original_url] = "/documents/#{@document.id}/feedback"
       redirect_to preferences_path and return
     end
@@ -212,7 +212,7 @@ class DocumentsController < ApplicationController
 
   def reading
     authorize Document
-    @feedbacks = current_user.feedbacks.all(:conditions => "accepted_by_user != false", :include => :document, :order => 'id desc')
+    @feedbacks = current_user.feedbacks.all(:conditions => "accepted_by_user = 't' or accepted_by_user is NULL", :include => :document, :order => 'id desc')
     if @feedbacks.size > 0
       @volunteers = current_user.volunteers.all(:conditions => "document_id not in (#{@feedbacks.collect(&:document_id).join(',')})", :include => :document, :order => 'id desc')
     else
