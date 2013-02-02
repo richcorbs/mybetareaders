@@ -2,6 +2,7 @@
 <% @rating = paragraph.rating_by_user current_user -%>
 <div class="row">
   <div class="span5">
+    <div class="paragraph_number"><%= @para %></div>
     <p class="paragraph" id="paragraph_text_<%= paragraph.id -%>" data-paragraph-text-id="<%= paragraph.id -%>">
       <%= paragraph.text -%>
     </p>
@@ -62,3 +63,4 @@
     </div>
   </div>
 </div>
+<% @para += 1 %>

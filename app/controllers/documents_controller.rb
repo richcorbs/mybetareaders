@@ -148,6 +148,7 @@ class DocumentsController < ApplicationController
       redirect_to preferences_path and return
     end
 
+    @para     = 1
     @criteria = Criterium.where(:fiction => @document.fiction).order(:criterium)
 
     @feedback = Feedback.find_by_document_id_and_user_id(params[:id], current_user)
