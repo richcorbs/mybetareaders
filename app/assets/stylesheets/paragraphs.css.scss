@@ -2,13 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .paragraph {
-  padding-left:15px;
+  padding-left:30px;
   text-align:justify;
 }
 div.paragraph_number {
   color: #ddd;
   float: left;
-  text-align: right;
-  margin-left: -8px;
   font-size: 0.75em;
+  margin-left: -5px;
+  text-align: right;
+  width: 25px;
 }
