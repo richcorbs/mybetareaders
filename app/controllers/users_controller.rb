@@ -119,7 +119,7 @@ class UsersController < ApplicationController
       @user.reading_preferences[g.genre] = (params[g.genre] && params[g.genre] == '1') ? true : false
     end
     @user.save
-    if @user.reading_level.present? && @user.reading_preferences.index("true").present?
+    if @user.reading_level.present? && @user.reading_preferences.has_value?("true")
       flash[:notice] = "Preferences updated."
       if session[:original_url]
         temp = session[:original_url]
