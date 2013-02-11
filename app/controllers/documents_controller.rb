@@ -63,12 +63,12 @@ class DocumentsController < ApplicationController
           @document.mark_as_paid
           flash[:notice] = "'#{@document.title.titleize}' has been marked as 'paid' since it was less than 1000 words."
         end
+        params[:text].gsub!(/\t/,'')
         params[:text].gsub!(/\r\n\r\n/,'\r\n')
         paragraphs = []
         splits1 = params[:text].split(/\r\n/)
         splits2 = params[:text].split('\r\n')
-        paragraphs = splits1 if splits1.size > 1
-        paragraphs = splits2 if splits2.size > 1
+        paragraphs = splits1.size > splits2.size ? splits1 : splits2
         paragraphs.each do |paragraph|
           Paragraph.create(:document_id => @document.id, :text => paragraph) if paragraph.present?
         end
