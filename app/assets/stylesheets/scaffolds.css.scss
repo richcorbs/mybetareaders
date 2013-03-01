@@ -175,6 +175,9 @@ a.book-icon-link:hover {
 .hidden {
   display:none;
 }
+.simpleColorContainer {
+  padding-top:10px;
+}
 .simpleColorDisplay {
   margin: 0 auto;
   display:inline-block;
@@ -204,15 +207,17 @@ ul.nav {
   margin-top: -60px;
   width: 100%;
   color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
-  background: #630057;
-  background: -moz-linear-gradient(45deg,#000947 0%,#4C7BB8 100%);
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+  background: white;
+  background: url( /assets/people-blue.jpg ) no-repeat center;
+  background-position-y: 50px;
+ /* background: -moz-linear-gradient(45deg,#000947 0%,#4C7BB8 100%);
   background: -webkit-gradient(linear,left bottom,right top,color-stop(0%,#000947),color-stop(100%,#4C7BB8));
   background: -webkit-linear-gradient(-45deg,#000947 30%, #4C7BB8 100%);
   background: -o-linear-gradient(45deg,#000947 30%,#4C7BB8 100%);
   background: -ms-linear-gradient(45deg,#000947 0%,#4C7BB8 100%);
   background: linear-gradient(45deg,#000947 30%,#4C7BB8 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000947',endColorstr='#4C7BB8',GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000947',endColorstr='#4C7BB8',GradientType=1); */
   -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2), inset 0 -3px 7px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,0.2), inset 0 -3px 7px rgba(0,0,0,0.2);
   box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.2), inset 0 -3px 7px rgba(0, 0, 0, 0.2);
@@ -232,25 +237,28 @@ ul.nav {
   font-size: 125px;
   line-height: 1;
   letter-spacing: -2px;
+  padding-top: 35px;
 }
 .jumbotron h2 {
   font-family: Ubuntu;
   font-size: 40px;
-  font-weight: 200;
+  font-weight: 700;
   line-height: 40px;
   padding-top: 30px;
+  padding-bottom: 30px;
   text-align: center;
 }
 .jumbotron p {
   font-family: Ubuntu;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: bold;
   text-align: center;
 }
 .brand {
   font-family: Ubuntu;
 }
 #home {
+  background-color: #fcfcfc;
   text-align:center;
   padding: 100px 10px;
   margin-bottom:0px;

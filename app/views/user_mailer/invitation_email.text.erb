@@ -1,0 +1,9 @@
+Hello!
+
+You have been invited to read "<%= @document.title -%>".
+
+Here is your unique URL to get started:
+
+  http://mybetareaders.<%= Rails.env == 'production' ? 'com' : 'dev' -%>/documents/<%= @document.id %>/feedback?t=<%= @user.auth_token -%>
+
+Enjoy your book!
