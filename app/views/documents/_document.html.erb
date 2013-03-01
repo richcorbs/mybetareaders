@@ -13,15 +13,15 @@
   <h5 class="<%= "gray" if !doc.active? -%>"><%= doc.title -%></h5>
   <% if current_user == doc.user -%>
     <% if doc.active? -%>
-      <%= link_to (image_tag "book-icon.png", :width => 125, :style => "background-color: #{doc.book_icon_color || 'white'}"), edit_document_path(:id => doc), :class => "book-icon-link" -%>
+      <%= link_to (image_tag "book-icon.png", :width => 125, :style => "background-color: #{book_icon_background_color(doc)};"), edit_document_path(:id => doc), :class => "book-icon-link" -%>
     <% else %>
-      <%= link_to (image_tag "book-icon-ghost.png", :width => 125, :style => "background-color: white;"), pay_for_document_path(:id => doc), :class => "book-icon-link" -%>
+    <%= link_to (image_tag "book-icon.png", :width => 125, :style => "background-color: #{book_icon_background_color(doc)};"), pay_for_document_path(:id => doc), :class => "book-icon-link" -%>
     <% end -%>
   <% else -%>
     <% if doc.active? -%>
-      <%= link_to (image_tag "book-icon.png", :width => 125, :style => "background-color: #{doc.book_icon_color || 'white'}"), feedback_path(doc.id) -%>
+      <%= link_to (image_tag "book-icon.png", :width => 125, :style => "background-color: #{book_icon_background_color(doc)};"), feedback_path(doc.id) -%>
     <% else %>
-      <%= image_tag "book-icon-ghost.png", :width => 125, :style => "background-color: white;" %>
+      <%= image_tag "book-icon.png", :width => 125, :style => "background-color: #{book_icon_background_color(doc)};" -%>
     <% end %>
   <% end -%>
   <p><%= link_to "About This Document", "#readability_#{doc.id}", :class => "smaller about-this-document", :style => "padding:3px;", "data-toggle" => "modal" -%></p>
