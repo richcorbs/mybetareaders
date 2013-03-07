@@ -78,6 +78,9 @@ label {
 .document-block {
   background:white;border:1px solid #e6e6e6; padding:30px;
 }
+.document-block a:hover {
+  text-decoration: none;
+}
 .book-binding {
   height:180px; width:40px;
 }
